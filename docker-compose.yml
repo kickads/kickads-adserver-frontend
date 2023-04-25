@@ -1,0 +1,9 @@
+version: '3'
+services:
+  kickads-adserver-frontend:
+    container_name: kickads-adserver-container
+    build:
+      dockerfile: ./Dockerfile
+    image: kickads-adserver-image
+    ports:
+      - 3000:3000
