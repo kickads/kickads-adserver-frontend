@@ -30,6 +30,12 @@ Correr docker-compose.yml (antes completar archivo .env)
   docker compose up -d
 ```
 
+Instalar dependencias locales de node
+
+```bash
+  npm install
+```
+
 ## Environment Variables
 
 `VITE_GOOGLE_CLIENT_ID=`
