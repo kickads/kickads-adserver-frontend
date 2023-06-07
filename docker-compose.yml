@@ -4,10 +4,10 @@ services:
     container_name: kickads-adserver-container
     build:
       dockerfile: ./Dockerfile
-    image: kickads-adserver-image
+    image: kickads-adserver-frontend-image
     ports:
       - 3000:3000
     volumes:
       - .:/app
       - /app/node_modules/
-    command: npm run dev
+    command: pnpm dev

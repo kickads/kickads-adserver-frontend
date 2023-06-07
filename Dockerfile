@@ -1,10 +1,12 @@
 FROM node:18-alpine
 
+RUN npm i -g pnpm
+
 WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install
+RUN pnpm i
 
 COPY . ./
 
