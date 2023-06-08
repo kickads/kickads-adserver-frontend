@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Login } from '../views';
-import { NotFound } from '../components';
+import { Login, NotFound } from '../views';
 
 const router = createBrowserRouter([
   {
