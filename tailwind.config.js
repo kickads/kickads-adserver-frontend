@@ -11,7 +11,6 @@ export default {
       },
       backgroundImage: {
         'mural-kickads': "url('./src/assets/images/mural-kickads.png')",
-        'cloud-notfound': "url('./src/assets/images/notfound/not-found.png')"
       }
     },
     fontFamily: {
