@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-Black.otf);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-BlackItalic.ttf);
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-BoldItalic.ttf);
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-MediumItalic.ttf);
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-Bold.otf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-Medium.otf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-SemiBold.otf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-Regular.otf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url(../../../assets/fonts/exo/Exo-Thin.otf);
+  font-weight: 200;
+}

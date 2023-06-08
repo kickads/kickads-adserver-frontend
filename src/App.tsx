@@ -1,9 +1,9 @@
-import { ButtonLogin } from './components/ButtonLogin';
+import { AppRouter } from './router';
 
 function App() {
   return (
     <>
-      <ButtonLogin/>
+      <AppRouter />
     </>
   );
 }
