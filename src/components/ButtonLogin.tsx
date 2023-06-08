@@ -12,7 +12,7 @@ export function ButtonLogin() {
   });
   return (
     <>
-      <h2>ButtonLogin</h2>
+      <h2 className="font-inter">ButtonLogin</h2>
       <button onClick={ () => login() }>
         <img
           src="https://onymos.com/wp-content/uploads/2020/10/google-signin-button.png"

@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Inter var';
+  src: url(../assets/fonts/Inter-Black.otf);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url(../assets/fonts/Inter-Bold.otf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url(../assets/fonts/Inter-Medium.otf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url(../assets/fonts/Inter-SemiBold.otf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url(../assets/fonts/Inter-Regular.otf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Inter var';
+  src: url(../assets/fonts/Inter-Thin.otf);
+  font-weight: 200;
+}
