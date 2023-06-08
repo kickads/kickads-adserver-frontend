@@ -10,7 +10,8 @@ export default {
         'kickads': '#14a8a4'
       },
       backgroundImage: {
-        'mural-kickads': "url('./src/assets/images/mural-kickads.png')"
+        'mural-kickads': "url('./src/assets/images/mural-kickads.png')",
+        'cloud-notfound': "url('./src/assets/images/notfound/not-found.png')"
       }
     },
     fontFamily: {
