@@ -1,5 +1,3 @@
-import logoKickads from '../../assets/images/logos/kickads.png';
-import logoGoogle from '../../assets/images/logos/google.svg';
 import { HeartIcon } from '@heroicons/react/24/solid';
 import { ButtonGoogleLogin } from '../../components';
 
@@ -15,17 +13,9 @@ export function Login() {
         </div>
       </section>
 
-      <section className="min-h-screen flex justify-center items-center bg-mural-kickads bg-cover bg-[-137px] bg-no-repeat lg:hidden">
-        <div className="flex flex-col gap-8 w-80 py-6 bg-white rounded-3xl">
-          {/*<div>*/}
-          {/*  <img*/}
-          {/*    src={ logoKickads }*/}
-          {/*    alt="Logo Kickads"*/}
-          {/*    width="110"*/}
-          {/*    className="mx-auto"*/}
-          {/*  />*/}
-          {/*</div>*/}
-          <h2 className="text-zinc-700 font-exo font-black text-3xl text-center">Kickads <br/> Adserver 2.0</h2>
+      <section className="min-h-screen bg-mural-kickads bg-cover bg-[center_bottom_-20rem] bg-no-repeat lg:hidden">
+        <div className="flex flex-col gap-8 py-6 bg-white rounded-3xl">
+          <h2 className="text-zinc-700 font-exo font-black text-3xl text-center md:text-5xl">Kickads <br/> Adserver 2.0</h2>
           <div className="flex justify-center">
             <ButtonGoogleLogin />
           </div>
