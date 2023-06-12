@@ -6,11 +6,15 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        // 'spin': 'spin 3s linear infinite'
+      },
       colors: {
         'kickads': '#14a8a4'
       },
       backgroundImage: {
         'mural-kickads': "url('./src/assets/images/mural-kickads.png')",
+        'mural-kickads-mono': "url('./src/assets/images/mural-kickads-monochromatic.png')",
       }
     },
     fontFamily: {
