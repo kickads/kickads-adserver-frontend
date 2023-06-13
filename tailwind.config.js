@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'wrapper': '1366px'
+      },
       animation: {
         // 'spin': 'spin 3s linear infinite'
       },
