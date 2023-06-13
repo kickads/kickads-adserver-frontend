@@ -6,7 +6,7 @@ export function Guest() {
 
   return (
     <>
-      <section className="hidden min-h-screen lg:flex">
+      <section className="animate__animated animate__fadeIn hidden min-h-screen lg:flex">
         <div className="w-8/12 bg-mural-kickads-mono bg-[size:125%] bg-no-repeat bg-[-300px]"></div>
         <div className="w-4/12 flex flex-col gap-8 items-center justify-center">
           <div className="overflow-hidden">

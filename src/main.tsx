@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { AuthProvider } from './providers/AuthProvider';
 import { AppRouter } from './router';
 
+import 'animate.css';
 import './css/index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
