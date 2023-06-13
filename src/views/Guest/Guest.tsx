@@ -11,8 +11,8 @@ export function Guest() {
         <div className="w-4/12 flex flex-col gap-8 items-center justify-center">
           <div className="overflow-hidden">
             <img
-              src={ user.avatar }
-              alt={ user.name }
+              src={ user?.avatar }
+              alt={ user?.name }
               className="mx-auto w-36 rounded-full grayscale"
             />
           </div>
@@ -42,8 +42,8 @@ export function Guest() {
         <div className="flex flex-col gap-8 py-6 bg-white rounded-3xl">
           <div className="overflow-hidden">
             <img
-              src={ user.avatar }
-              alt={ user.name }
+              src={ user?.avatar }
+              alt={ user?.name }
               className="mx-auto w-24 rounded-full grayscale sm:w-36"
             />
           </div>

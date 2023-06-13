@@ -7,6 +7,7 @@ import { Wrapper } from '../Utils';
 
 export function Navbar() {
   const user = useStore(state => state.user);
+  const deleteUser = useStore(state => state.deleteUser);
 
   return (
     <header className="relative">
@@ -70,7 +71,7 @@ export function Navbar() {
           <Menu>
             <div className="flex items-center">
               <Menu.Button>
-                <img src={ user.avatar } alt={ user.name } className="w-12 rounded-full" />
+                <img src={ user?.avatar } alt={ user?.name } className="w-12 rounded-full" />
               </Menu.Button>
             </div>
 
@@ -105,7 +106,6 @@ export function Navbar() {
                     {({ active }) => (
                       <a
                         className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
-                        href="/account-settings"
                       >
                         <span>
                           <Cog6ToothIcon className="w-5" />
@@ -116,15 +116,15 @@ export function Navbar() {
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <button
                         className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
-                        href="/account-settings"
+                        onClick={ () => deleteUser() }
                       >
                         <span>
                           <ArrowLeftOnRectangleIcon className="w-5" />
                         </span>
                         Cerrar Sesión
-                      </a>
+                      </button>
                     )}
                   </Menu.Item>
                 </Menu.Items>

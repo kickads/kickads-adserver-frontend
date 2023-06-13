@@ -1,13 +1,14 @@
 import { StateCreator } from 'zustand';
+import { deleteCookie } from '../../helpers';
 import { UserSlice } from './models';
-import { getCookie } from '../../helpers';
-
-const credentials = getCookie('credentials');
-const initialState = JSON.parse(credentials ?? '{}');
 
 export const createUserSlice: StateCreator<UserSlice> = (set) => ({
-  user: initialState,
+  user: null,
   setUser: (credentials) => {
     set(() => ({ user: credentials }));
+  },
+  deleteUser: () => {
+    deleteCookie('credentials');
+    set(() => ({ user: null }));
   }
 });
