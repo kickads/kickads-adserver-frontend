@@ -1,14 +1,18 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import logoGoogle from '../../assets/images/logos/google.svg';
+import { useStore } from '../../state/store';
 
 export function ButtonGoogleLogin() {
+  const setUser = useStore(state => state.setUser);
   const login = useGoogleLogin({
     onSuccess: async tokenResponse => {
       const accessToken = tokenResponse.access_token;
       const res = await axios.post(`http://localhost/api/auth/login`, { accessToken });
 
-      console.log(res);
+      setUser(res.data.data.user);
+      Cookies.set('credentials', JSON.stringify(res.data.data.user));
     },
   });
 
