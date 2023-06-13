@@ -1,8 +1,8 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import Cookies from 'js-cookie';
 import { useStore } from '../../state/store';
 import { axiosInstance } from '../../config';
 import logoGoogle from '../../assets/images/logos/google.svg';
+import { setCookie } from '../../helpers';
 
 export function ButtonGoogleLogin() {
   const setUser = useStore(state => state.setUser);
@@ -12,7 +12,7 @@ export function ButtonGoogleLogin() {
       const res = await axiosInstance.post(`auth/login`, { accessToken });
 
       setUser(res.data.data.user);
-      Cookies.set('credentials', JSON.stringify(res.data.data.user));
+      setCookie('credentials', JSON.stringify(res.data.data.user));
     },
   });
 

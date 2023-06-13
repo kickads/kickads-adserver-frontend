@@ -1,8 +1,8 @@
 import { StateCreator } from 'zustand';
-import Cookies from 'js-cookie';
 import { UserSlice } from './models';
+import { getCookie } from '../../helpers';
 
-const credentials = Cookies.get('credentials');
+const credentials = getCookie('credentials');
 const initialState = JSON.parse(credentials ?? '{}');
 
 export const createUserSlice: StateCreator<UserSlice> = (set) => ({
