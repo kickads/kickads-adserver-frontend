@@ -1,9 +1,17 @@
-import { ArrowLeftOnRectangleIcon, Bars3Icon, Cog6ToothIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowLeftOnRectangleIcon,
+  Bars3Icon,
+  Cog6ToothIcon,
+  UserIcon,
+  UsersIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline';
 import { useStore } from '../../state/store';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import LogoKickads from '../../assets/images/logos/logo-kickads.svg';
 import { Wrapper } from '../Utils';
+import { Link } from 'react-router-dom';
 
 export function Navbar() {
   const user = useStore(state => state.user);
@@ -71,7 +79,7 @@ export function Navbar() {
           <Menu>
             <div className="flex items-center">
               <Menu.Button>
-                <img src={ user?.avatar } alt={ user?.name } className="w-12 rounded-full" />
+                <img src={ user?.avatar ?? '' } alt={ user?.name } className="w-12 rounded-full" />
               </Menu.Button>
             </div>
 
@@ -100,6 +108,19 @@ export function Navbar() {
                         </span>
                         Perfil
                       </a>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
+                        to="admin/users"
+                      >
+                        <span>
+                          <UsersIcon className="w-5" />
+                        </span>
+                        Usuarios
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>

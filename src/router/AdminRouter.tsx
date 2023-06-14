@@ -1,4 +1,4 @@
-import { Admin, NotFound } from '../views';
+import { Admin, AdminUsers, NotFound } from '../views';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -6,6 +6,15 @@ const router = createBrowserRouter([
     index: true,
     element: <Admin />,
     errorElement: <NotFound />
+  },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: 'users',
+        element: <AdminUsers />
+      }
+    ]
   }
 ]);
 
