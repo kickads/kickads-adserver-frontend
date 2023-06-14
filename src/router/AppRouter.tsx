@@ -7,11 +7,15 @@ import { getCookie } from '../helpers';
 
 export function AppRouter() {
   const user = useStore(state => state.user);
-  const setUser = useStore(state => state.setUser);
+  const setUserAuth = useStore(state => state.setUserAuth);
 
   useEffect(() => {
-    const credentials = getCookie('credentials') ?? '{}';
-    setUser(JSON.parse(credentials));
+    const userCredentials = getCookie('userCredentials');
+    const userToken = getCookie('userToken');
+
+    if (!userCredentials || !userToken) return;
+
+    setUserAuth(JSON.parse(userCredentials), JSON.parse(userToken));
   }, []);
 
   if (user?.role === 'guest') {

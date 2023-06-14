@@ -7,7 +7,7 @@ import { Wrapper } from '../Utils';
 
 export function Navbar() {
   const user = useStore(state => state.user);
-  const deleteUser = useStore(state => state.deleteUser);
+  const removeUserAuth = useStore(state => state.removeUserAuth);
 
   return (
     <header className="relative">
@@ -118,7 +118,7 @@ export function Navbar() {
                     {({ active }) => (
                       <button
                         className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
-                        onClick={ () => deleteUser() }
+                        onClick={ () => removeUserAuth() }
                       >
                         <span>
                           <ArrowLeftOnRectangleIcon className="w-5" />

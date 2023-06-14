@@ -4,11 +4,13 @@ import { UserSlice } from './models';
 
 export const createUserSlice: StateCreator<UserSlice> = (set) => ({
   user: null,
-  setUser: (credentials) => {
-    set(() => ({ user: credentials }));
+  userToken: null,
+  setUserAuth: (userCredentials, userToken) => {
+    set(() => ({ user: userCredentials, userToken: userToken }));
   },
-  deleteUser: () => {
-    deleteCookie('credentials');
-    set(() => ({ user: null }));
+  removeUserAuth: () => {
+    deleteCookie('userCredentials');
+    deleteCookie('userToken');
+    set(() => ({ user: null, userToken: null }));
   }
 });

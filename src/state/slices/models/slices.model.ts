@@ -2,6 +2,7 @@ import { User } from '../../../models';
 
 export interface UserSlice {
   user: User | null,
-  setUser: (credentials: User) => void,
-  deleteUser: () => void,
+  userToken: string | null,
+  setUserAuth: (userCredentials: User, userToken: string) => void,
+  removeUserAuth: () => void,
 }
