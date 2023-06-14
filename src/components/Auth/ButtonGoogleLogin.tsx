@@ -3,21 +3,32 @@ import { useStore } from '../../state/store';
 import { axiosInstance } from '../../config';
 import logoGoogle from '../../assets/images/logos/google.svg';
 import { setCookie } from '../../helpers';
+import { User } from '../../models';
+
+export interface UserResponse {
+  data: Data;
+}
+
+export interface Data {
+  kads_token: string;
+  user: User;
+  status: string;
+}
 
 export function ButtonGoogleLogin() {
   const setUser = useStore(state => state.setUser);
   const login = useGoogleLogin({
     onSuccess: async tokenResponse => {
       const accessToken = tokenResponse.access_token;
-      const res = await axiosInstance.post(`auth/login`, { accessToken });
+      const { data: { data } } = await axiosInstance.post<UserResponse>(`auth/login`, { accessToken });
 
-      setUser(res.data.data.user);
-      setCookie('credentials', JSON.stringify(res.data.data.user));
+      setUser(data.user);
+      setCookie('credentials', JSON.stringify(data.user));
     },
   });
 
   return (
-    <button className="flex items-center bg-gray-100 rounded-3xl p-1" onClick={ () => login()  }>
+    <button className="flex items-center bg-gray-100 rounded-3xl p-1" onClick={ () => login() }>
       <span>
         <img src={ logoGoogle } alt="Logo google" width="40"/>
       </span>
