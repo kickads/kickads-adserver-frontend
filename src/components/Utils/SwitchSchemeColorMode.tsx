@@ -6,18 +6,18 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-const initialState = Boolean(localStorage.getItem('theme') === 'dark');
-
 export function SwitchSchemeColorMode() {
-  const [ enabled, setEnabled ] = useState(initialState);
+  const [ enabled, setEnabled ] = useState(Boolean(localStorage.getItem('theme') === 'dark'));
 
   useEffect(() => {
     if (enabled) {
       localStorage.theme = 'dark';
       document.documentElement.classList.add('dark');
+      console.log(`dark: ${ enabled }`);
     } else {
       localStorage.theme = 'light';
       document.documentElement.classList.remove('dark');
+      console.log(`light: ${ enabled }`);
     }
   }, [ enabled ]);
 

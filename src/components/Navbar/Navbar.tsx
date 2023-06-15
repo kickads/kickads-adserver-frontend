@@ -10,7 +10,7 @@ import { useStore } from '../../state/store';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import LogoKickads from '../../assets/images/logos/logo-kickads.svg';
-import { Wrapper } from '../Utils';
+import { SwitchSchemeColorMode, Wrapper } from '../Utils';
 import { Link } from 'react-router-dom';
 
 const userMenu = [
@@ -138,6 +138,9 @@ export function Navbar() {
                       </button>
                     )}
                   </Menu.Item>
+                  <div className="text-center py-2">
+                    <SwitchSchemeColorMode />
+                  </div>
                 </Menu.Items>
               </Transition>
             </div>
