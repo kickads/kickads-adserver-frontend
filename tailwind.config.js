@@ -10,9 +10,6 @@ export default {
       screens: {
         'wrapper': '1366px'
       },
-      animation: {
-        // 'spin': 'spin 3s linear infinite'
-      },
       colors: {
         'kickads': '#14a8a4'
       },
