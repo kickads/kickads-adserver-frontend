@@ -13,19 +13,34 @@ import LogoKickads from '../../assets/images/logos/logo-kickads.svg';
 import { Wrapper } from '../Utils';
 import { Link } from 'react-router-dom';
 
+const userMenu = [
+  {
+    name: 'Profile',
+    path: 'profile',
+    Icon: <UserIcon className="w-5" />
+  },
+  {
+    name: 'Users',
+    path: 'admin/users',
+    Icon: <UsersIcon className="w-5" />
+  },
+  {
+    name: 'Settings',
+    path: 'settings',
+    Icon: <Cog6ToothIcon className="w-5" />
+  },
+];
+
 export function Navbar() {
   const user = useStore(state => state.user);
   const removeUserAuth = useStore(state => state.removeUserAuth);
 
   return (
     <header className="relative">
-
       <Wrapper className="flex justify-between items-center p-2 wrapper:px-0">
-
         <div className="hidden lg:block">
           <img src={ LogoKickads } alt="Logo Kickads" width="40" />
         </div>
-
         <div className="hidden lg:block">
           <ul className="flex gap-8 text-gray-900 font-bold font-inter">
             <li>Sección 1</li>
@@ -34,7 +49,6 @@ export function Navbar() {
             <li>Sección 4</li>
           </ul>
         </div>
-
         <div className="flex lg:hidden">
           <Disclosure>
             {({ open }) => (
@@ -46,7 +60,6 @@ export function Navbar() {
                       : <Bars3Icon className="w-10 stroke-zinc-500" />
                   }
                 </Disclosure.Button>
-
                 <div className="absolute top-full left-0 px-3 w-full bg-white">
                   <Transition
                     as={ Fragment }
@@ -74,7 +87,6 @@ export function Navbar() {
             )}
           </Disclosure>
         </div>
-
         <div className="relative">
           <Menu>
             <div className="flex items-center">
@@ -82,7 +94,6 @@ export function Navbar() {
                 <img src={ user?.avatar ?? '' } alt={ user?.name } className="w-12 rounded-full" />
               </Menu.Button>
             </div>
-
             <div>
               <Transition
                 as={ Fragment }
@@ -97,44 +108,23 @@ export function Navbar() {
                   as="div"
                   className="absolute right-0 top-16 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden"
                 >
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
-                        href="/account-settings"
-                      >
-                        <span>
-                          <UserIcon className="w-5" />
-                        </span>
-                        Perfil
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
-                        to="admin/users"
-                      >
-                        <span>
-                          <UsersIcon className="w-5" />
-                        </span>
-                        Usuarios
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
-                      >
-                        <span>
-                          <Cog6ToothIcon className="w-5" />
-                        </span>
-                        Configuración
-                      </a>
-                    )}
-                  </Menu.Item>
+                  {
+                    userMenu.map(menu => (
+                      <Menu.Item key={ menu.name }>
+                        {({ active }) => (
+                          <Link
+                            className={`flex items-center gap-1 px-3 py-2 ${ active && 'bg-gray-100' }`}
+                            to={ menu.path }
+                          >
+                            <span>
+                              { menu.Icon }
+                            </span>
+                              { menu.name }
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    ))
+                  }
                   <Menu.Item>
                     {({ active }) => (
                       <button
@@ -153,9 +143,7 @@ export function Navbar() {
             </div>
           </Menu>
         </div>
-
       </Wrapper>
-
     </header>
   );
 }
