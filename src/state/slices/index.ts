@@ -1,1 +1,2 @@
-export * from './CreateUserSlice.ts';
+export * from './CreateUserSlice';
+export * from './CreateColorModeSlice';

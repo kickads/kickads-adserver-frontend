@@ -8,14 +8,17 @@ import { getCookie } from '../helpers';
 export function AppRouter() {
   const user = useStore(state => state.user);
   const setUserAuth = useStore(state => state.setUserAuth);
+  const setColorMode = useStore(state => state.setColorMode);
 
   useEffect(() => {
+    const colorMode = localStorage.getItem('theme') ?? 'light';
     const userCredentials = getCookie('userCredentials');
     const userToken = getCookie('userToken');
 
     if (!userCredentials || !userToken) return;
 
     setUserAuth(JSON.parse(userCredentials), JSON.parse(userToken));
+    setColorMode(colorMode);
   }, []);
 
   if (user?.role === 'guest') {

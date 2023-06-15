@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { useStore } from '../../state/store';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 export function SwitchSchemeColorMode() {
+  const setColorMode = useStore(state => state.setColorMode);
   const [ enabled, setEnabled ] = useState(Boolean(localStorage.getItem('theme') === 'dark'));
 
   useEffect(() => {
     if (enabled) {
-      localStorage.theme = 'dark';
-      document.documentElement.classList.add('dark');
+      setColorMode('dark');
     } else {
-      localStorage.theme = 'light';
-      document.documentElement.classList.remove('dark');
+      setColorMode('light');
     }
   }, [ enabled ]);
 
