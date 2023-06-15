@@ -12,13 +12,15 @@ export function AppRouter() {
 
   useEffect(() => {
     const colorMode = localStorage.getItem('theme') ?? 'light';
+    console.log(colorMode);
     const userCredentials = getCookie('userCredentials');
     const userToken = getCookie('userToken');
+
+    setColorMode(colorMode);
 
     if (!userCredentials || !userToken) return;
 
     setUserAuth(JSON.parse(userCredentials), JSON.parse(userToken));
-    setColorMode(colorMode);
   }, []);
 
   if (user?.role === 'guest') {
