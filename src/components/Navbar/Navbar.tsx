@@ -36,31 +36,31 @@ export function Navbar() {
   const removeUserAuth = useStore(state => state.removeUserAuth);
 
   return (
-    <header className="relative">
+    <header className="relative bg-white dark:bg-slate-900">
       <Wrapper className="flex justify-between items-center p-2 wrapper:px-0">
         <div className="hidden lg:block">
           <img src={ LogoKickads } alt="Logo Kickads" width="40" />
         </div>
         <div className="hidden lg:block">
           <ul className="flex gap-8 text-gray-900 font-bold font-inter">
-            <li>Sección 1</li>
-            <li>Sección 2</li>
-            <li>Sección 3</li>
-            <li>Sección 4</li>
+            <li className="dark:text-white">Sección 1</li>
+            <li className="dark:text-white">Sección 2</li>
+            <li className="dark:text-white">Sección 3</li>
+            <li className="dark:text-white">Sección 4</li>
           </ul>
         </div>
         <div className="flex lg:hidden">
           <Disclosure>
             {({ open }) => (
               <>
-                <Disclosure.Button className="relative hover:bg-gray-100 p-1 rounded-lg">
+                <Disclosure.Button className="relative hover:bg-gray-100 p-1 rounded-lg dark:hover:bg-slate-800">
                   {
                     open
-                      ? <XMarkIcon className="w-10 stroke-zinc-500" />
-                      : <Bars3Icon className="w-10 stroke-zinc-500" />
+                      ? <XMarkIcon className="w-10 stroke-zinc-500 dark:stroke-white" />
+                      : <Bars3Icon className="w-10 stroke-zinc-500 dark:stroke-white" />
                   }
                 </Disclosure.Button>
-                <div className="absolute top-full left-0 px-3 w-full bg-white">
+                <div className="absolute top-full left-0 px-3 w-full bg-white dark:bg-slate-900">
                   <Transition
                     as={ Fragment }
                     enter="transition ease-out duration-100"
@@ -73,11 +73,11 @@ export function Navbar() {
                     <Disclosure.Panel>
                       <nav>
                         <ul className="flex flex-col font-inter">
-                          <li className="hover:bg-gray-100 p-3 rounded-lg">Item 1</li>
-                          <li className="hover:bg-gray-100 p-3 rounded-lg">Item 2</li>
-                          <li className="hover:bg-gray-100 p-3 rounded-lg">Item 3</li>
-                          <li className="hover:bg-gray-100 p-3 rounded-lg">Item 4</li>
-                          <li className="hover:bg-gray-100 p-3 rounded-lg">Item 5</li>
+                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 1</li>
+                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 2</li>
+                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 3</li>
+                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 4</li>
+                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 5</li>
                         </ul>
                       </nav>
                     </Disclosure.Panel>
@@ -106,14 +106,14 @@ export function Navbar() {
               >
                 <Menu.Items
                   as="div"
-                  className="absolute right-0 top-16 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden"
+                  className="absolute right-0 top-16 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden dark:bg-slate-800"
                 >
                   {
                     userMenu.map(menu => (
                       <Menu.Item key={ menu.name }>
                         {({ active }) => (
                           <Link
-                            className={`flex items-center gap-1 px-3 py-2 ${ active && 'bg-gray-100' }`}
+                            className={`flex items-center gap-1 px-3 py-2 dark:text-slate-300 ${ active && 'bg-gray-100 dark:bg-slate-700 dark:hover:text-white' }`}
                             to={ menu.path }
                           >
                             <span>
@@ -128,7 +128,7 @@ export function Navbar() {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        className={`flex items-center gap-1 px-3 py-2 ${active && 'bg-gray-100'}`}
+                        className={`flex items-center gap-1 px-3 py-2 dark:text-slate-300 ${ active && 'bg-gray-100 dark:bg-slate-700 dark:hover:text-white' }`}
                         onClick={ () => removeUserAuth() }
                       >
                         <span>

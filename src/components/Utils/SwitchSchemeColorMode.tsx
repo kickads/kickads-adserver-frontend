@@ -13,11 +13,9 @@ export function SwitchSchemeColorMode() {
     if (enabled) {
       localStorage.theme = 'dark';
       document.documentElement.classList.add('dark');
-      console.log(`dark: ${ enabled }`);
     } else {
       localStorage.theme = 'light';
       document.documentElement.classList.remove('dark');
-      console.log(`light: ${ enabled }`);
     }
   }, [ enabled ]);
 
