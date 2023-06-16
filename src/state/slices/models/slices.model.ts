@@ -1,4 +1,4 @@
-import { User } from '../../../models';
+import { User } from '../../../models/User/user.model.ts';
 
 export interface UserSlice {
   user: User | null,

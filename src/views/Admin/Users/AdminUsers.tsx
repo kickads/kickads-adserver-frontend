@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { axiosInstance } from '../../../config';
-import { useStore } from '../../../state/store';
-import { User } from '../../../models';
-import { List } from '../../../components';
+import { useStore } from '../../../state/store/store.tsx';
+import { User } from '../../../models/User/user.model.ts';
+import { axiosInstance } from '../../../config/axios/axios.config.ts';
+import { List } from '../../../components/List/List.tsx';
 
 export interface UsersResponse {
   status: string;

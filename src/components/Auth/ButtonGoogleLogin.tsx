@@ -1,10 +1,10 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import { useStore } from '../../state/store';
 import toast from 'react-hot-toast';
-import { axiosInstance } from '../../config';
-import logoGoogle from '../../assets/images/logos/google.svg';
-import { setCookie } from '../../helpers';
-import { User } from '../../models';
+import { useStore } from '../../state/store/store.tsx';
+import { User } from '../../models/User/user.model.ts';
+import { setCookie } from '../../helpers/Cookies/cookies.helper.ts';
+import { axiosInstance } from '../../config/axios/axios.config.ts';
+import getImagePath from '../../helpers/GetImagePath/getImagePath.ts';
 
 export interface UserResponse {
   data: ApiResponse;
@@ -46,7 +46,7 @@ export function ButtonGoogleLogin() {
   return (
     <button className="flex items-center bg-gray-100 rounded-3xl p-1" onClick={ () => login() }>
       <span>
-        <img src={ logoGoogle } alt="Logo google" width="40"/>
+        <img src={ getImagePath('logos/google.svg') } alt="Logo google" width="40"/>
       </span>
       <p className="px-4 font-inter font-semibold">Iniciar sesión con Google</p>
     </button>

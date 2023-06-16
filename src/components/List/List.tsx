@@ -1,9 +1,9 @@
 import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
-import { useStore } from '../../state/store';
-import { axiosInstance } from '../../config';
 import toast from 'react-hot-toast';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
+import { useStore } from '../../state/store/store.tsx';
+import { axiosInstance } from '../../config/axios/axios.config.ts';
 
 interface Props {
   items: CurrentItem[];

@@ -1,25 +1,16 @@
-import { PublicRouter } from './PublicRouter.tsx';
-import { GuestRouter } from './GuestRouter.tsx';
-import { useStore } from '../state/store';
-import { AdminRouter } from './AdminRouter.tsx';
 import { useEffect } from 'react';
-import { getCookie } from '../helpers';
+import { useStore } from '../state/store/store.tsx';
+import { GuestRouter } from './GuestRouter.tsx';
+import { AdminRouter } from './AdminRouter.tsx';
+import { PublicRouter } from './PublicRouter.tsx';
 
 export function AppRouter() {
   const user = useStore(state => state.user);
-  const setUserAuth = useStore(state => state.setUserAuth);
   const setColorMode = useStore(state => state.setColorMode);
 
   useEffect(() => {
     const colorMode = localStorage.getItem('theme') ?? 'light';
-    const userCredentials = getCookie('userCredentials');
-    const userToken = getCookie('userToken');
-
     setColorMode(colorMode);
-
-    if (!userCredentials || !userToken) return;
-
-    setUserAuth(JSON.parse(userCredentials), JSON.parse(userToken));
   }, []);
 
   if (user?.role === 'guest') {

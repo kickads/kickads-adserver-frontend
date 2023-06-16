@@ -14,8 +14,8 @@ export default {
         'kickads': '#14a8a4'
       },
       backgroundImage: {
-        'mural-kickads': "url('./src/assets/images/mural-kickads.png')",
-        'mural-kickads-mono': "url('./src/assets/images/mural-kickads-monochromatic.png')",
+        'mural-kickads': "url('src/assets/images/mural-kickads.png')",
+        'mural-kickads-mono': "url('src/assets/images/mural-kickads-monochromatic.png')",
       }
     },
     fontFamily: {

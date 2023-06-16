@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { ColorModeSlice } from './models';
+import { ColorModeSlice } from './models/colorMode.model.ts';
 
 export const createColorModeSlice: StateCreator<ColorModeSlice> = (set) => ({
   colorMode: 'light',

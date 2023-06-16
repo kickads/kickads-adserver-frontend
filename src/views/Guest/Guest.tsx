@@ -1,5 +1,5 @@
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
-import { useStore } from '../../state/store';
+import { useStore } from '../../state/store/store.tsx';
 
 export function Guest() {
   const user = useStore(state => state.user);

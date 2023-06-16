@@ -1,3 +1,6 @@
+import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ArrowLeftOnRectangleIcon,
   Bars3Icon,
@@ -6,12 +9,11 @@ import {
   UsersIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { useStore } from '../../state/store';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import LogoKickads from '../../assets/images/logos/logo-kickads.svg';
-import { SwitchSchemeColorMode, Wrapper } from '../Utils';
-import { Link } from 'react-router-dom';
+import { useStore } from '../../state/store/store.tsx';
+import { axiosInstance } from '../../config/axios/axios.config.ts';
+import { SwitchSchemeColorMode } from '../Utils/SwitchSchemeColorMode.tsx';
+import { Wrapper } from '../Utils/Wrapper.tsx';
+import getImagePath from '../../helpers/GetImagePath/getImagePath.ts';
 
 const userMenu = [
   {
@@ -33,13 +35,24 @@ const userMenu = [
 
 export function Navbar() {
   const user = useStore(state => state.user);
+  const userToken = useStore(state => state.userToken);
   const removeUserAuth = useStore(state => state.removeUserAuth);
+
+  const logout = async () => {
+    await axiosInstance.post('auth/logout', {}, {
+      headers: {
+        'Authorization': `Bearer ${ userToken }`
+      }
+    });
+
+    removeUserAuth();
+  }
 
   return (
     <header className="relative bg-white dark:bg-slate-900">
       <Wrapper className="flex justify-between items-center p-2 wrapper:px-0">
         <div className="hidden lg:block">
-          <img src={ LogoKickads } alt="Logo Kickads" width="40" />
+          <img src={ getImagePath('logos/logo-kickads.svg') } alt="Logo Kickads" width="40" />
         </div>
         <div className="hidden lg:block">
           <ul className="flex gap-8 text-gray-900 font-bold font-inter">
@@ -129,7 +142,7 @@ export function Navbar() {
                     {({ active }) => (
                       <button
                         className={`flex items-center gap-1 px-3 py-2 dark:text-slate-300 ${ active && 'bg-gray-100 dark:bg-slate-700 dark:hover:text-white' }`}
-                        onClick={ () => removeUserAuth() }
+                        onClick={ () => logout() }
                       >
                         <span>
                           <ArrowLeftOnRectangleIcon className="w-5" />

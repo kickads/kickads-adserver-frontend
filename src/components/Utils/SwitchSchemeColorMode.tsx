@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-import { useStore } from '../../state/store';
+import { useStore } from '../../state/store/store.tsx';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')

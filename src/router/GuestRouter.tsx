@@ -1,11 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Guest, NotFound } from '../views';
+import { Guest } from '../views/Guest/Guest.tsx';
 
 const router = createBrowserRouter([
   {
-    index: true,
+    path: '/',
     element: <Guest />,
-    errorElement: <NotFound />
   }
 ]);
 

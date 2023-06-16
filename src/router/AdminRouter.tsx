@@ -1,12 +1,13 @@
-import { Admin, AdminUsers, NotFound } from '../views';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { LayoutAdmin } from '../layouts';
+import { Admin } from '../views/Admin/Admin.tsx';
+import { AdminUsers } from '../views/Admin/Users/AdminUsers.tsx';
+import { LayoutAdmin } from '../layouts/LayoutAdmin/LayoutAdmin.tsx';
+import { NotFound } from '../views/NotFound/NotFound.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LayoutAdmin />,
-    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: '*',
+    element: <NotFound />
+  }
 ]);
 
 export function AdminRouter() {
