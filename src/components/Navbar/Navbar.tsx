@@ -23,7 +23,7 @@ const userMenu = [
   },
   {
     name: 'Users',
-    path: 'admin/users',
+    path: 'users',
     Icon: <UsersIcon className="w-5" />
   },
   {
@@ -62,7 +62,7 @@ export function Navbar() {
             <li className="dark:text-white">Sección 4</li>
           </ul>
         </div>
-        <div className="flex lg:hidden">
+        <div className="flex lg:hidden z-10">
           <Disclosure>
             {({ open }) => (
               <>
@@ -119,7 +119,7 @@ export function Navbar() {
               >
                 <Menu.Items
                   as="div"
-                  className="absolute right-0 top-16 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden dark:bg-slate-800"
+                  className="absolute right-0 top-16 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden dark:bg-slate-800 z-10"
                 >
                   {
                     userMenu.map(menu => (

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import toast from 'react-hot-toast';
 import { useStore } from '../../state/store/store.tsx';
@@ -24,6 +25,7 @@ async function loginUser(accessToken: string): Promise<ApiResponse> {
 
 export function ButtonGoogleLogin() {
   const setUserAuth = useStore(state => state.setUserAuth);
+  const navigate = useNavigate();
   const login = useGoogleLogin({
     onSuccess: async tokenResponse => {
       const accessToken = tokenResponse.access_token;
@@ -40,6 +42,12 @@ export function ButtonGoogleLogin() {
       setUserAuth(user, user_token);
       setCookie('userCredentials', JSON.stringify(user));
       setCookie('userToken', JSON.stringify(user_token));
+
+      if (user.role === 'guest') {
+        navigate('/guest');
+      } else if(user.role === 'admin') {
+        navigate('/admin');
+      }
     },
   });
 
