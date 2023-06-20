@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import { useStore } from '../state/store/store.tsx';
 import { Guest } from '../views/Guest/Guest.tsx';
 import { LayoutAdmin } from '../layouts/LayoutAdmin/LayoutAdmin.tsx';
 import { Admin } from '../views/Admin/Admin.tsx';
@@ -90,12 +88,5 @@ const router = createBrowserRouter(
 // ]
 
 export function AppRouter() {
-  const setColorMode = useStore(state => state.setColorMode);
-
-  useEffect(() => {
-    const colorMode = localStorage.getItem('theme') ?? 'light';
-    setColorMode(colorMode);
-  }, []);
-
   return <RouterProvider router={ router } />
 }
