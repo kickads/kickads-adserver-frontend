@@ -3,6 +3,7 @@ import { useStore } from '../../../state/store/store.tsx';
 import { User } from '../../../models/User/user.model.ts';
 import { axiosInstance } from '../../../config/axios/axios.config.ts';
 import { List } from '../../../components/List/List.tsx';
+import { UserIcon, UsersIcon } from '@heroicons/react/24/outline';
 
 export interface UsersResponse {
   status: string;
@@ -43,31 +44,68 @@ export function AdminUsers() {
   if (!data) return <h1>Loading users...</h1>;
 
   return (
-    <>
-      <h2>AdminUsers</h2>
-      <section className="p-3">
-        <h3>Usuarios</h3>
-        <ul className="flex flex-col gap-4 font-inter">
-          {
-            data.users.map(user => user.id !== userAuth?.id && (
-              <li key={ user.id } className="flex items-center gap-3">
-                <span className="block w-10 rounded-full overflow-hidden">
-                  <img src={ user.avatar ?? '' } alt={ user.name } />
-                </span>
-                <span className="text-xs">{ user.name } - { user.email }</span>
-                <span>
-                  <List
-                    items={ roles }
-                    currentItem={ { id: user.id, name: user.role } }
-                    url={ `users/${ user.id }` }
-                    fieldToUpdate="role"
-                  />
-                </span>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-    </>
+    <section className="flex flex-col gap-10 min-h-[calc(100vh-64px)] py-6">
+
+      {/* Buscador de usuarios */}
+      <div className="max-w-md w-full mx-auto">
+        <label htmlFor="email" className="sr-only">
+          Buscar usuarios
+        </label>
+        <div className="flex rounded-md shadow-sm">
+          <div className="relative flex flex-grow items-stretch focus-within:z-10">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <UsersIcon className="h-5 w-5 text-gray-400 dark:stroke-slate-300" aria-hidden="true" />
+            </div>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300 dark:ring-slate-700"
+              placeholder="Buscar..."
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Tabla de usuarios */}
+      <table className="w-full max-w-md mx-auto">
+        <thead className="sr-only">
+        <tr className="font-inter text-gray-600">
+          <th className="py-3 px-2 text-left">Usuario</th>
+          <th className="py-3 px-2 text-left">Rol</th>
+        </tr>
+        </thead>
+        <tbody>
+        { data.users.map(user => user.id !== userAuth?.id && (
+          <tr key={ user.id }>
+            <td className="whitespace-nowrap py-5 text-sm sm:pl-0">
+              <div className="flex items-center">
+                <div className="w-10 flex-shrink-0">
+                  {
+                    user.avatar
+                      ? <img className="rounded-full" src={ user.avatar } alt={ user.name } />
+                      : <UserIcon className="h-9 mx-auto dark:stroke-white" />
+                  }
+                </div>
+                <div className="ml-4">
+                  <div className="font-medium text-gray-900 dark:text-white">{ user.name }</div>
+                  <div className="mt-1 text-gray-500 dark:text-slate-400">{ user.email }</div>
+                </div>
+              </div>
+            </td>
+            <td className="whitespace-nowrap py-5 text-sm text-gray-500">
+              <List
+                items={ roles }
+                currentItem={ { id: user.id, name: user.role } }
+                url={ `users/${ user.id }` }
+                fieldToUpdate="role"
+              />
+            </td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
+
+    </section>
   );
 }

@@ -63,8 +63,8 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
   return (
     <div className="relative w-fit">
       <Listbox value={ selected } onChange={ (e) => handleOnChange(e) }>
-        <Listbox.Button className="w-full py-2 px-4 bg-white text-left rounded-lg shadow">
-          <span className="pr-6 block truncate capitalize">{ selected.name }</span>
+        <Listbox.Button className="max-w-[97px] sm:max-w-none overflow-hidden md:w-full py-2 px-4 bg-white dark:bg-slate-800 text-left rounded-lg shadow">
+          <span className="pr-6 block truncate capitalize dark:text-white">{ selected.name }</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon
               className="h-5 w-5 text-gray-400"
@@ -78,14 +78,14 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute w-fit mt-1 bg-white rounded-lg shadow text-left z-10">
+          <Listbox.Options className="absolute right-0 w-fit mt-1 bg-white dark:bg-slate-800 rounded-lg shadow text-left z-10 overflow-hidden">
             { items.map(item => (
               <Listbox.Option
                 key={ item.id }
                 value={ item }
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-10 pr-4 whitespace-nowrap ${
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-400'
+                  `relative cursor-default select-none py-2 pl-10 pr-4 whitespace-nowrap dark:text-slate-300 ${
+                    active ? 'bg-gray-100 text-gray-900 dark:text-white dark:bg-slate-700' : 'text-gray-400'
                   }`
                 }
               >
@@ -96,7 +96,7 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
                     </span>
                     { selected
                         ? (<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-900">
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            <CheckIcon className="h-5 w-5 dark:stroke-white" aria-hidden="true" />
                           </span>)
                         : null
                     }
