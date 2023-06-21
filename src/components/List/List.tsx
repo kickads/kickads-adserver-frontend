@@ -78,7 +78,7 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute right-0 w-fit mt-1 bg-white dark:bg-slate-800 rounded-lg shadow text-left z-10 overflow-hidden">
+          <Listbox.Options className="absolute right-0 sm:left-0 w-fit mt-1 bg-white dark:bg-slate-800 rounded-lg shadow text-left z-10 overflow-hidden">
             { items.map(item => (
               <Listbox.Option
                 key={ item.id }

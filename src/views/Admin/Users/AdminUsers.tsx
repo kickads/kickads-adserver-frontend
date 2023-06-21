@@ -4,6 +4,7 @@ import { User } from '../../../models/User/user.model.ts';
 import { axiosInstance } from '../../../config/axios/axios.config.ts';
 import { List } from '../../../components/List/List.tsx';
 import { UserIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { useEffect, useState } from 'react';
 
 export interface UsersResponse {
   status: string;
@@ -34,14 +35,22 @@ const roles = [
 ];
 
 export function AdminUsers() {
+  const [ usersFiltered, setUsersFiltered ] = useState<User[]>([]);
   const userToken = useStore(state => state.userToken);
-  const userAuth = useStore(state => state.user);
   const { data } = useQuery({
     queryKey: [ 'users' ],
     queryFn: () => getAllUsers(userToken)
   });
 
+  useEffect(() => {
+    if (data?.users) setUsersFiltered(data.users)
+  }, [ data ]);
+
   if (!data) return <h1>Loading users...</h1>;
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsersFiltered(data.users.filter(user => user.name.toLowerCase().includes(e.target.value)));
+  };
 
   return (
     <section className="flex flex-col gap-10 min-h-[calc(100vh-64px)] py-6">
@@ -62,6 +71,8 @@ export function AdminUsers() {
               id="email"
               className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300 dark:ring-slate-700"
               placeholder="Buscar..."
+              autoComplete="off"
+              onChange={ handleOnChange }
             />
           </div>
         </div>
@@ -76,7 +87,7 @@ export function AdminUsers() {
         </tr>
         </thead>
         <tbody>
-        { data.users.map(user => user.id !== userAuth?.id && (
+        { usersFiltered.map(user => (
           <tr key={ user.id }>
             <td className="whitespace-nowrap py-5 text-sm sm:pl-0">
               <div className="flex items-center">

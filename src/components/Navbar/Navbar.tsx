@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ArrowLeftOnRectangleIcon,
@@ -56,7 +56,9 @@ export function Navbar() {
         </div>
         <div className="hidden lg:block">
           <ul className="flex gap-8 text-gray-900 font-bold font-inter">
-            <li className="dark:text-white">Sección 1</li>
+            <li className="dark:text-white">
+              <NavLink to="/admin">Home</NavLink>
+            </li>
             <li className="dark:text-white">Sección 2</li>
             <li className="dark:text-white">Sección 3</li>
             <li className="dark:text-white">Sección 4</li>
@@ -73,7 +75,7 @@ export function Navbar() {
                       : <Bars3Icon className="w-10 stroke-zinc-500 dark:stroke-white" />
                   }
                 </Disclosure.Button>
-                <div className="absolute top-full left-0 px-3 w-full bg-white dark:bg-slate-900">
+                <div className={ `absolute top-full left-0 px-3 ${ open && 'pb-3'} w-full bg-white dark:bg-slate-900` }>
                   <Transition
                     as={ Fragment }
                     enter="transition ease-out duration-100"
@@ -86,7 +88,9 @@ export function Navbar() {
                     <Disclosure.Panel>
                       <nav>
                         <ul className="flex flex-col font-inter">
-                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 1</li>
+                          <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">
+                            <NavLink to="/admin">Home</NavLink>
+                          </li>
                           <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 2</li>
                           <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 3</li>
                           <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 4</li>
@@ -104,7 +108,7 @@ export function Navbar() {
           <Menu>
             <div className="flex items-center">
               <Menu.Button>
-                <img src={ user?.avatar ?? '' } alt={ user?.name } className="w-12 rounded-full" />
+                <img src={ user?.avatar ?? '' } alt={ user?.name } className="w-11 rounded-full" />
               </Menu.Button>
             </div>
             <div>
@@ -119,7 +123,7 @@ export function Navbar() {
               >
                 <Menu.Items
                   as="div"
-                  className="absolute right-0 top-16 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden dark:bg-slate-800 z-10"
+                  className="absolute right-0 top-14 bg-white shadow flex flex-col gap-1 w-40 font-inter rounded-lg overflow-hidden dark:bg-slate-800 z-10"
                 >
                   {
                     userMenu.map(menu => (
