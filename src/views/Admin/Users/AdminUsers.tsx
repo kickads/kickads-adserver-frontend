@@ -26,12 +26,12 @@ async function getAllUsers(userToken: string | null) {
 }
 
 const roles = [
-  { id: 1, name: 'Admin', path: 'admin' },
-  { id: 2, name: 'Operations', path: 'operations' },
-  { id: 3, name: 'Client services', path: 'client-services' },
-  { id: 4, name: 'Comercial', path: 'comercial' },
-  { id: 5, name: 'Finance', path: 'finance' },
-  { id: 6, name: 'Guest', path: 'guest' },
+  { id: 1, name: 'admin' },
+  { id: 2, name: 'operations' },
+  { id: 3, name: 'client services' },
+  { id: 4, name: 'commercial' },
+  { id: 5, name: 'finance' },
+  { id: 6, name: 'guest' },
 ];
 
 export function AdminUsers() {
@@ -43,17 +43,18 @@ export function AdminUsers() {
   });
 
   useEffect(() => {
-    if (data?.users) setUsersFiltered(data.users)
+    if (data?.users) setUsersFiltered(data.users);
   }, [ data ]);
 
   if (!data) return <h1>Loading users...</h1>;
+  console.log(data.users);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsersFiltered(data.users.filter(user => user.name.toLowerCase().includes(e.target.value)));
   };
 
   return (
-    <section className="flex flex-col gap-10 min-h-[calc(100vh-64px)] py-6">
+    <section className="flex flex-col gap-10 min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-60px)] py-6">
 
       {/* Buscador de usuarios */}
       <div className="max-w-md w-full mx-auto">

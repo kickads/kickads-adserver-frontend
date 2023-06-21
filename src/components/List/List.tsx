@@ -15,7 +15,6 @@ interface Props {
 interface CurrentItem {
   id: number,
   name: string,
-  path?: string,
 }
 
 interface ConfigForUpdate {
@@ -42,12 +41,13 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
 
   const handleOnChange = async (e: CurrentItem) => {
     setSelected(e);
+    console.log(e);
 
     const configForUpdate: ConfigForUpdate = {
       userId: currentItem.id,
       userToken: userToken,
       fieldToUpdate: fieldToUpdate,
-      fieldUpdated: e.path ?? '',
+      fieldUpdated: e.name ?? '',
       url: url
     }
 
@@ -61,7 +61,7 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
   }
 
   return (
-    <div className="relative w-fit">
+    <div className="relative ml-auto w-fit">
       <Listbox value={ selected } onChange={ (e) => handleOnChange(e) }>
         <Listbox.Button className="max-w-[97px] sm:max-w-none overflow-hidden md:w-full py-2 px-4 bg-white dark:bg-slate-800 text-left rounded-lg shadow">
           <span className="pr-6 block truncate capitalize dark:text-white">{ selected.name }</span>
@@ -84,7 +84,7 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
                 key={ item.id }
                 value={ item }
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-10 pr-4 whitespace-nowrap dark:text-slate-300 ${
+                  `relative cursor-default select-none py-2 pl-10 pr-4 capitalize whitespace-nowrap dark:text-slate-300 ${
                     active ? 'bg-gray-100 text-gray-900 dark:text-white dark:bg-slate-700' : 'text-gray-400'
                   }`
                 }
