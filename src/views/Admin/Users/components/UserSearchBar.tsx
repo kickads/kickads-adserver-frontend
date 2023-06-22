@@ -1,10 +1,18 @@
 import { UsersIcon } from '@heroicons/react/24/outline';
+import { User } from '../../../../models/User/user.model.ts';
 
 interface Props {
-  handleUserOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  setUsersFiltered: React.Dispatch<React.SetStateAction<User[]>>,
+  users: User[]
+  // handleUserOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export function UserSearchBar({ handleUserOnChange }: Props) {
+export function UserSearchBar({ setUsersFiltered, users }: Props) {
+
+  const handleUserOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsersFiltered(users.filter(user => user.name.toLowerCase().includes(e.target.value)) ?? []);
+  };
+
   return (
     <div className="max-w-md w-full mx-auto">
       <label htmlFor="email" className="sr-only">

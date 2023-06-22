@@ -5,7 +5,13 @@ interface Props {
   children: React.ReactNode
 }
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 10,
+    },
+  },
+});
 
 export function ReactQueryProvider({ children }: Props) {
   return (

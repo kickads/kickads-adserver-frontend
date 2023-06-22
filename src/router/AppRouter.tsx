@@ -4,7 +4,7 @@ import { LayoutAdmin } from '../layouts/LayoutAdmin/LayoutAdmin.tsx';
 import { Admin } from '../views/Admin/Admin.tsx';
 import { Login } from '../views/Login/Login.tsx';
 import { RequireAuth } from './guards/RequireAuth.tsx';
-import { AdminUsers } from '../views/Admin/Users/AdminUsers.tsx';
+import { AdminUsers, getAllUsersLoader } from '../views/Admin/Users/AdminUsers.tsx';
 import { RequireGuest } from './guards/RequireGuest.tsx';
 import { RequireAdmin } from './guards/RequireAdmin.tsx';
 import { RequireNotAuth } from './guards/RequireNotAuth.tsx';
@@ -26,8 +26,8 @@ const router = createBrowserRouter(
         </Route>
         <Route path="admin" element={ <RequireAdmin /> } >
           <Route element={ <LayoutAdmin /> } >
-            <Route index element={ <Admin /> }/>
-            <Route path="users" element={ <AdminUsers /> }/>
+            <Route index element={ <Admin /> } />
+            <Route path="users" element={ <AdminUsers /> } loader={ getAllUsersLoader }/>
           </Route>
         </Route>
       </Route>

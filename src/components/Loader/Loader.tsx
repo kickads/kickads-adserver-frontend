@@ -5,5 +5,9 @@ interface Props {
 }
 
 export function Loader({ className }: Props) {
-  return <ArrowPathIcon className={ className } />;
+  return (
+    <div className="overflow-hidden w-full">
+      <ArrowPathIcon className={ className } />
+    </div>
+  );
 }
