@@ -41,7 +41,6 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
 
   const handleOnChange = async (e: CurrentItem) => {
     setSelected(e);
-    console.log(e);
 
     const configForUpdate: ConfigForUpdate = {
       userId: currentItem.id,
@@ -94,7 +93,7 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
                     <span className={`block truncate ${ selected ? 'font-medium' : 'font-normal' }`}>
                       { item.name }
                     </span>
-                    { selected
+                    { selected || item.name === currentItem.name
                         ? (<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-900">
                             <CheckIcon className="h-5 w-5 dark:stroke-white" aria-hidden="true" />
                           </span>)
