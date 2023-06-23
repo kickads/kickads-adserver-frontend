@@ -1,5 +1,5 @@
-import { getCookie } from '../../helpers/Cookies/cookies.helper.ts';
 import { axiosInstance } from '../../config/axios/axios.config.ts';
+import { getCookie } from '../../helpers/Cookies/cookies.helper.ts';
 import { UsersResponse } from '../../views/Admin/Users/AdminUsers.tsx';
 
 export async function getAllUsers() {
