@@ -27,7 +27,7 @@ export function AdminUsers() {
   }, [ data ]);
 
   return (
-    <section className="flex flex-col gap-10 min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-60px)] py-6">
+    <section className="flex flex-col gap-10 min-h-[calc(100vh-64px)] lg:min-h-[calc(100vh-56px)] py-6">
 
       <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
         <Await resolve={ loaderData.users }>

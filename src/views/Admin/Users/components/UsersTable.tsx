@@ -1,5 +1,6 @@
-import { UserIcon } from '@heroicons/react/24/outline';
+import getImagePath from '../../../../helpers/GetImagePath/getImagePath.ts';
 import { List } from '../../../../components/List/List.tsx';
+import { AvatarFallback } from '../../../../components/AvatarFallback/AvatarFallback.tsx';
 import { User } from '../../../../models/User/user.model.ts';
 
 interface Props {
@@ -29,11 +30,16 @@ export function UsersTable({ users }: Props) {
         <tr key={ user.id }>
           <td className="whitespace-nowrap py-5 text-sm sm:pl-0">
             <div className="flex items-center">
-              <div className="w-10 flex-shrink-0">
+              <div className="w-10 flex-shrink-0 rounded-full overflow-hidden">
+                {/*{*/}
+                {/*  user.avatar*/}
+                {/*    ? <div className="flex items-center justify-center font-inter text-lg h-10 bg-slate-400 text-white uppercase rounded-full">{ user.name.charAt(0) }</div>*/}
+                {/*    : <div className="flex items-center justify-center font-inter text-lg h-10 bg-slate-400 text-white uppercase rounded-full">{ user.name.charAt(0) }</div>*/}
+                {/*}*/}
                 {
                   user.avatar
-                    ? <img className="rounded-full" src={ user.avatar } alt={ user.name }/>
-                    : <UserIcon className="h-9 mx-auto dark:stroke-white"/>
+                    ? <AvatarFallback src={ user.avatar } alt={ user.name } className="h-10" />
+                    : <img src={ getImagePath('icons/user.svg') } alt="Image" className="h-10" />
                 }
               </div>
               <div className="ml-4">

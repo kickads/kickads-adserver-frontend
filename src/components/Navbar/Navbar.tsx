@@ -14,6 +14,7 @@ import { axiosInstance } from '../../config/axios/axios.config.ts';
 import { SwitchSchemeColorMode } from '../Utils/SwitchSchemeColorMode.tsx';
 import { Wrapper } from '../Utils/Wrapper.tsx';
 import getImagePath from '../../helpers/GetImagePath/getImagePath.ts';
+import { AvatarFallback } from '../AvatarFallback/AvatarFallback.tsx';
 
 const userMenu = [
   {
@@ -107,8 +108,17 @@ export function Navbar() {
         <div className="relative">
           <Menu>
             <div className="flex items-center">
-              <Menu.Button>
-                <img src={ user?.avatar ?? '' } alt={ user?.name } className="w-11 rounded-full" />
+              <Menu.Button className="rounded-full overflow-hidden w-10">
+                {
+                  user?.avatar
+                    ? <AvatarFallback
+                        src={ user.avatar }
+                        alt={ user.name }
+                        className="h-10"
+                      />
+                    : <img src={ getImagePath('icons/user.svg') } alt="Image" className="" />
+                }
+                {/*<img src={ user?.avatar ?? '' } alt={ user?.name } className="w-11 rounded-full" />*/}
               </Menu.Button>
             </div>
             <div>
