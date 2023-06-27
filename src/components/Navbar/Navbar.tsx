@@ -4,7 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ArrowLeftOnRectangleIcon,
   Bars3Icon,
-  Cog6ToothIcon,
+  Cog6ToothIcon, SquaresPlusIcon,
   UserIcon,
   UsersIcon,
   XMarkIcon
@@ -26,6 +26,11 @@ const userMenu = [
     name: 'Users',
     path: 'users',
     Icon: <UsersIcon className="w-5" />
+  },
+  {
+    name: 'Crud actions',
+    path: 'crud-actions',
+    Icon: <SquaresPlusIcon className="w-5" />
   },
   {
     name: 'Settings',
@@ -58,7 +63,7 @@ export function Navbar() {
         <div className="hidden lg:block">
           <ul className="flex gap-8 text-gray-900 font-bold font-inter">
             <li className="dark:text-white">
-              <NavLink to="/admin">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li className="dark:text-white">Sección 2</li>
             <li className="dark:text-white">Sección 3</li>
@@ -90,7 +95,7 @@ export function Navbar() {
                       <nav>
                         <ul className="flex flex-col font-inter">
                           <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">
-                            <NavLink to="/admin">Home</NavLink>
+                            <NavLink to="/">Home</NavLink>
                           </li>
                           <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 2</li>
                           <li className="hover:bg-gray-100 p-3 rounded-lg dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">Item 3</li>
