@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { useMutation } from '@tanstack/react-query';
 import { axiosInstance } from '../../../../../config/axios/axios.config.ts';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { queryClient } from '../../../../../providers/ReactQueryProvider.tsx';
 
 interface SearchItemProps {
   item: SearchItem;
@@ -11,19 +13,47 @@ interface SearchItem {
   name: string;
 }
 
+interface DeleteSearchItem {
+  id: number;
+}
+
 export function SearchItem({ item }: SearchItemProps) {
   const [ status, setStatus ] = useState(false);
   const [ itemUpdated, setItemUpdated ] = useState('');
-
+  const mutation = useMutation({
+    mutationFn: ({ id, name }: SearchItem) => updateSearchedItem(id, name),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ 'countries' ]
+      });
+    }
+  });
+  const mutationDelete = useMutation({
+    mutationFn: ({ id }: DeleteSearchItem) => deleteSearchedItem(id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ 'countries' ]
+      });
+    }
+  });
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>, id: number) => {
     e.preventDefault();
-    await axiosInstance.patch(`countries/${ id }`, { name: itemUpdated });
+
+    mutation.mutate({
+      id: id,
+      name: itemUpdated
+    });
+
     setStatus(!status);
   }
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setItemUpdated(e.target.value);
+  }
+
+  const handleDelete = (id: number) => {
+    mutationDelete.mutate({ id });
   }
 
   return (
@@ -43,7 +73,8 @@ export function SearchItem({ item }: SearchItemProps) {
                 />
                 <div className="flex items-center gap-3">
                   <button
-                    className="bg-kickads text-white px-2 py-1 rounded text-xs"
+                    disabled={ itemUpdated.length < 1 }
+                    className={ `bg-kickads text-white px-2 py-1 rounded text-xs ${ itemUpdated.length < 1 && 'opacity-75 cursor-not-allowed' }` }
                   >Guardar</button>
                 </div>
               </form>
@@ -54,10 +85,19 @@ export function SearchItem({ item }: SearchItemProps) {
         <button onClick={ () => setStatus(!status) }>
           <PencilSquareIcon className="h-5 hover:stroke-kickads dark:stroke-slate-400 dark:hover:stroke-kickads" />
         </button>
-        <button>
+        <button onClick={ () => handleDelete(item.id) }>
           <TrashIcon className="h-5 hover:stroke-red-400 dark:stroke-slate-400 dark:hover:stroke-red-400" />
         </button>
       </td>
     </tr>
   );
+}
+
+async function updateSearchedItem(id: number, name: string) {
+  await axiosInstance.patch(`countries/${ id }`, { name });
+}
+
+async function deleteSearchedItem(id: number) {
+  console.log(id);
+  await axiosInstance.delete(`countries/${ id }`);
 }
