@@ -20,7 +20,7 @@ export function Countries() {
   return (
     <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
       <Await resolve={ loaderData.countries }>
-        <div className="animate__animated animate__fadeIn">
+        <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
           <SearchTable searchItems={ search } />
         </div>

@@ -33,21 +33,22 @@ const router = createBrowserRouter(
           <Route index element={ <Guest /> } />
         </Route>
         <Route path="admin" element={ <RequireAdmin /> }>
+
           <Route element={ <LayoutAdmin /> }>
             <Route index element={ <Home /> } />
             <Route path="users" element={ <AdminUsers /> } loader={ getAllUsersLoader } />
-
-            <Route path="crud-actions" element={ <AdminCrudActions /> }>
-              <Route index element={ <Countries /> } loader={ getAllCountriesLoader } />
-              <Route path="entities" element={ <Entities /> } />
-              <Route path="business-model" element={ <BusinessModel /> } />
-              <Route path="priorities" element={ <Priorities /> } />
-              <Route path="companies" element={ <Companies /> } />
-              <Route path="currencies" element={ <Currencies /> } />
-              <Route path="roles" element={ <Roles /> } />
-            </Route>
-
           </Route>
+
+          <Route path="crud-actions" element={ <AdminCrudActions /> }>
+            <Route index element={ <Countries /> } loader={ getAllCountriesLoader } />
+            <Route path="entities" element={ <Entities /> } />
+            <Route path="business-model" element={ <BusinessModel /> } />
+            <Route path="priorities" element={ <Priorities /> } />
+            <Route path="companies" element={ <Companies /> } />
+            <Route path="currencies" element={ <Currencies /> } />
+            <Route path="roles" element={ <Roles /> } />
+          </Route>
+
         </Route>
       </Route>
 
