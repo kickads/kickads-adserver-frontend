@@ -65,7 +65,7 @@ export function SearchItem({ item }: SearchItemProps) {
   };
 
   const handleDelete = (id: number) => {
-    confirmNotification({ title: item.name, text: 'Confirmar' }).then(result => {
+    confirmNotification({ title: item.name }).then(result => {
       (result.isConfirmed) && mutationDelete.mutate({ id });
     })
   };
