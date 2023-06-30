@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 import { axiosInstance } from '../../../../../config/axios/axios.config.ts';
 import {
-  CheckCircleIcon,
   PencilSquareIcon,
   TrashIcon,
-  XCircleIcon,
 } from '@heroicons/react/24/outline';
 import { queryClient } from '../../../../../providers/ReactQueryProvider.tsx';
 import { getCookie } from '../../../../../helpers/Cookies/cookies.helper.ts';
-import { successNotification } from '../../../../../services/notification/notification.services.ts';
+import {
+  confirmNotification,
+  successNotification
+} from '../../../../../services/notification/notification.services.ts';
 
 interface SearchItemProps {
   item: SearchItem;
@@ -65,27 +65,9 @@ export function SearchItem({ item }: SearchItemProps) {
   };
 
   const handleDelete = (id: number) => {
-    toast((t) => (
-      <div className="w-32 py-1 flex flex-col items-center gap-1 dark:bg-slate-800">
-        <div className="font-inter font-bold text-sm text-gray-600 whitespace-nowrap dark:text-slate-300">Confirmar
-        </div>
-        <div className="flex w-full">
-          <button className="flex-1 flex items-center justify-center" onClick={ () => {
-            toast.dismiss(t.id);
-            mutationDelete.mutate({ id });
-          } }>
-            <CheckCircleIcon className="h-9 stroke-green-500"/>
-          </button>
-          <button className="flex-1 flex items-center justify-center" onClick={ () => toast.dismiss(t.id) }>
-            <XCircleIcon className="h-9 stroke-red-500"/>
-          </button>
-        </div>
-      </div>
-    ), {
-      className: 'p-0 m-0 dark:bg-slate-800 shadow',
-      position: 'top-center',
-      duration: 40000000000
-    });
+    confirmNotification({ title: item.name, text: 'Confirmar' }).then(result => {
+      (result.isConfirmed) && mutationDelete.mutate({ id });
+    })
   };
 
   return (
