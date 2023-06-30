@@ -36,11 +36,11 @@ async function updateField(configForUpdate: ConfigForUpdate) {
 }
 
 export function List({ items, currentItem, url, fieldToUpdate }: Props) {
-  const [ selected, setSelected ] = useState<CurrentItem>(currentItem);
+  const [ selectedItem, setSelectedItem ] = useState<CurrentItem>(currentItem);
   const userToken = useStore(state => state.userToken);
 
   const handleOnChange = async (e: CurrentItem) => {
-    setSelected(e);
+    setSelectedItem(e);
 
     const configForUpdate: ConfigForUpdate = {
       userId: currentItem.id,
@@ -61,9 +61,9 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
 
   return (
     <div className="relative ml-auto w-fit">
-      <Listbox value={ selected } onChange={ (e) => handleOnChange(e) }>
+      <Listbox value={ selectedItem } onChange={ (e) => handleOnChange(e) }>
         <Listbox.Button className="max-w-[97px] sm:max-w-none overflow-hidden md:w-full py-2 px-4 bg-white dark:bg-slate-800 text-left rounded-lg shadow">
-          <span className="pr-6 block truncate capitalize dark:text-white">{ selected.name }</span>
+          <span className="pr-6 block truncate capitalize dark:text-white">{ selectedItem.name }</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon
               className="h-5 w-5 text-gray-400"
@@ -93,7 +93,8 @@ export function List({ items, currentItem, url, fieldToUpdate }: Props) {
                     <span className={`block truncate ${ selected ? 'font-medium' : 'font-normal' }`}>
                       { item.name }
                     </span>
-                    { selected || item.name === currentItem.name
+                    {
+                      selected || item.name === selectedItem.name
                         ? (<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-900">
                             <CheckIcon className="h-5 w-5 dark:stroke-white" aria-hidden="true" />
                           </span>)

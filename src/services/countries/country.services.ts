@@ -1,17 +1,6 @@
 import { getCookie } from '../../helpers/Cookies/cookies.helper.ts';
 import { axiosInstance } from '../../config/axios/axios.config.ts';
-
-export interface CountryResponse {
-  status: string;
-  data: Country[];
-}
-
-export interface Country {
-  id: number;
-  name: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { CountryResponse } from '../../models/Country/country.model.ts';
 
 export async function getAllCountries() {
   const userToken = JSON.parse(getCookie('userToken') ?? '');
@@ -21,5 +10,5 @@ export async function getAllCountries() {
     }
   });
 
-  return data.data;
+  return data.data.countries;
 }
