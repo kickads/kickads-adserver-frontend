@@ -11,7 +11,7 @@ import { NotFound } from '../views/NotFound/NotFound.tsx';
 import { AdminCrudActions } from '../views/Admin/CrudActions/AdminCrudActions.tsx';
 import { Home } from '../views/Home/Home.tsx';
 import { Countries, getAllCountriesLoader } from '../views/Admin/CrudActions/Countries/Countries.tsx';
-import { Entities } from '../views/Admin/CrudActions/Entities/Entities.tsx';
+import { Entities, getAllEntitiesLoader } from '../views/Admin/CrudActions/Entities/Entities.tsx';
 import { BusinessModel } from '../views/Admin/CrudActions/BusinessModel/BusinessModel.tsx';
 import { Priorities } from '../views/Admin/CrudActions/Priorities/Priorities.tsx';
 import { Companies } from '../views/Admin/CrudActions/Companies/Companies.tsx';
@@ -41,7 +41,7 @@ const router = createBrowserRouter(
 
           <Route path="crud-actions" element={ <AdminCrudActions /> }>
             <Route index element={ <Countries /> } loader={ getAllCountriesLoader } />
-            <Route path="entities" element={ <Entities /> } />
+            <Route path="entities" element={ <Entities /> } loader={ getAllEntitiesLoader }  />
             <Route path="business-model" element={ <BusinessModel /> } />
             <Route path="priorities" element={ <Priorities /> } />
             <Route path="companies" element={ <Companies /> } />
