@@ -2,7 +2,6 @@ import { Await, defer, useLoaderData } from 'react-router-dom';
 import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
 import { getAllBusinessModels } from '../../../../services/businessModel/businessModel.services.ts';
 import { useQuery } from '@tanstack/react-query';
-import { getAllCountries } from '../../../../services/countries/country.services.ts';
 import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { useCrudMutation } from '../hooks/useCrudMutation.ts';
 import { Suspense } from 'react';
@@ -16,7 +15,7 @@ export interface Data {
 
 export function BusinessModel() {
   const loaderData = useLoaderData() as Data;
-  const { data } = useQuery({ queryKey: [ 'business-models' ], queryFn: getAllCountries });
+  const { data } = useQuery({ queryKey: [ 'business-models' ], queryFn: getAllBusinessModels });
   const { search, handleSearchChange } = useSearchByName(data ?? []);
 
   useCrudMutation({
