@@ -14,7 +14,7 @@ import { Countries, getAllCountriesLoader } from '../views/Admin/CrudActions/Cou
 import { Entities, getAllEntitiesLoader } from '../views/Admin/CrudActions/Entities/Entities.tsx';
 import { BusinessModel, getAllBusinessModelsLoader } from '../views/Admin/CrudActions/BusinessModel/BusinessModel.tsx';
 import { getAllPrioritiesLoader, Priorities } from '../views/Admin/CrudActions/Priorities/Priorities.tsx';
-import { Companies } from '../views/Admin/CrudActions/Companies/Companies.tsx';
+import { Companies, getAllCompaniesLoader } from '../views/Admin/CrudActions/Companies/Companies.tsx';
 import { Currencies } from '../views/Admin/CrudActions/Currencies/Currencies.tsx';
 import { Roles } from '../views/Admin/CrudActions/Roles/Roles.tsx';
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
             <Route path="entities" element={ <Entities /> } loader={ getAllEntitiesLoader }  />
             <Route path="business-model" element={ <BusinessModel /> } loader={ getAllBusinessModelsLoader } />
             <Route path="priorities" element={ <Priorities /> } loader={ getAllPrioritiesLoader } />
-            <Route path="companies" element={ <Companies /> } />
+            <Route path="companies" element={ <Companies /> } loader={ getAllCompaniesLoader } />
             <Route path="currencies" element={ <Currencies /> } />
             <Route path="roles" element={ <Roles /> } />
           </Route>
