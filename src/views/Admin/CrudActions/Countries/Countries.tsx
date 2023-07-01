@@ -9,8 +9,7 @@ import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
 import { useStore } from '../../../../state/store/store.tsx';
 import { successNotification } from '../../../../services/notification/notification.services.ts';
-import { getCookie } from '../../../../helpers/Cookies/cookies.helper.ts';
-import { axiosInstance } from '../../../../config/axios/axios.config.ts';
+import { createItem, deleteItem, updateItem } from '../services/crudActions.services.ts';
 
 export interface Data {
   countries: [];
@@ -26,6 +25,7 @@ export function Countries() {
   const { data } = useQuery({ queryKey: [ 'countries' ], queryFn: getAllCountries });
   const { search, handleSearchChange } = useSearchByName(data ?? []);
 
+  const userToken = useStore(state => state.userToken);
   const setCrudPath = useStore(state => state.setCrudPath);
   const setCrudQueryKey = useStore(state => state.setCrudQueryKey);
   const setCrudMutationDelete = useStore(state => state.setCrudMutationDelete);
@@ -33,7 +33,7 @@ export function Countries() {
   const setCrudMutationCreate = useStore(state => state.setCrudMutationCreate);
 
   const mutationCrudDelete = useMutation({
-    mutationFn: (id: number) => deleteItem('countries', id),
+    mutationFn: (id: number) => deleteItem({ userToken, id, path: 'countries' }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [ 'countries' ]
@@ -44,7 +44,7 @@ export function Countries() {
   });
 
   const mutationCrudUpdate = useMutation({
-    mutationFn: (item: ItemModel) => updateItem('countries', item),
+    mutationFn: (item: ItemModel) => updateItem({ userToken, item, path: 'countries' }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [ 'countries' ]
@@ -55,7 +55,7 @@ export function Countries() {
   });
 
   const mutationCrudCreate = useMutation({
-    mutationFn: (name: string) => createItem('countries', name),
+    mutationFn: (name: string) => createItem({ userToken, name, path: 'countries' }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [ 'countries' ]
@@ -91,35 +91,5 @@ export async function getAllCountriesLoader() {
       queryKey: [ 'countries' ],
       queryFn: getAllCountries
     })
-  });
-}
-
-async function deleteItem(path: string, id: number) {
-  const userToken = JSON.parse(getCookie('userToken') ?? '');
-
-  await axiosInstance.delete(`${ path }/${ id }`, {
-    headers: {
-      'Authorization': `Bearer ${ userToken }`
-    }
-  });
-}
-
-async function updateItem(path: string, item: ItemModel) {
-  const userToken = JSON.parse(getCookie('userToken') ?? '');
-
-  await axiosInstance.patch(`${ path }/${ item.id }`, { name: item.name }, {
-    headers: {
-      'Authorization': `Bearer ${ userToken }`
-    }
-  });
-}
-
-async function createItem(path: string, name: string) {
-  const userToken = JSON.parse(getCookie('userToken') ?? '');
-
-  await axiosInstance.post(`${ path }`, { name }, {
-    headers: {
-      'Authorization': `Bearer ${ userToken }`
-    },
   });
 }
