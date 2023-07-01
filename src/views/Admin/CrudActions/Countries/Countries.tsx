@@ -2,13 +2,13 @@ import { Suspense, useEffect } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
-import { getAllCountries } from '../../../../services/countries/country.services.ts';
+import { useStore } from '../../../../state/store/store.tsx';
 import { Search } from '../../../../components/Search/Search.tsx';
+import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
 import { Loader } from '../../../../components/Loader/Loader.tsx';
 import { useSearchByName } from '../../../../hooks/useSearch.ts';
-import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
-import { useStore } from '../../../../state/store/store.tsx';
 import { successNotification } from '../../../../services/notification/notification.services.ts';
+import { getAllCountries } from '../../../../services/countries/country.services.ts';
 import { createItem, deleteItem, updateItem } from '../services/crudActions.services.ts';
 
 export interface Data {
