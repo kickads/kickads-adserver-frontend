@@ -9,7 +9,7 @@ import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllCountries } from '../../../../services/countries/country.services.ts';
 import { useCrudMutation } from '../hooks/useCrudMutation.ts';
 
-export interface Data {
+interface Data {
   countries: [];
 }
 

@@ -9,7 +9,7 @@ import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllEntities } from '../../../../services/entities/entities.services.ts';
 import { useCrudMutation } from '../hooks/useCrudMutation.ts';
 
-export interface Data {
+interface Data {
   entities: [];
 }
 

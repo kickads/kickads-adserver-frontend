@@ -12,7 +12,7 @@ import { AdminCrudActions } from '../views/Admin/CrudActions/AdminCrudActions.ts
 import { Home } from '../views/Home/Home.tsx';
 import { Countries, getAllCountriesLoader } from '../views/Admin/CrudActions/Countries/Countries.tsx';
 import { Entities, getAllEntitiesLoader } from '../views/Admin/CrudActions/Entities/Entities.tsx';
-import { BusinessModel } from '../views/Admin/CrudActions/BusinessModel/BusinessModel.tsx';
+import { BusinessModel, getAllBusinessModelsLoader } from '../views/Admin/CrudActions/BusinessModel/BusinessModel.tsx';
 import { Priorities } from '../views/Admin/CrudActions/Priorities/Priorities.tsx';
 import { Companies } from '../views/Admin/CrudActions/Companies/Companies.tsx';
 import { Currencies } from '../views/Admin/CrudActions/Currencies/Currencies.tsx';
@@ -42,7 +42,7 @@ const router = createBrowserRouter(
           <Route path="crud-actions" element={ <AdminCrudActions /> }>
             <Route index element={ <Countries /> } loader={ getAllCountriesLoader } />
             <Route path="entities" element={ <Entities /> } loader={ getAllEntitiesLoader }  />
-            <Route path="business-model" element={ <BusinessModel /> } />
+            <Route path="business-model" element={ <BusinessModel /> } loader={ getAllBusinessModelsLoader } />
             <Route path="priorities" element={ <Priorities /> } />
             <Route path="companies" element={ <Companies /> } />
             <Route path="currencies" element={ <Currencies /> } />
