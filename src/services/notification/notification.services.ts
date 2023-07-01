@@ -4,19 +4,13 @@ import { SweetAlertResult } from 'sweetalert2';
 
 export function successNotification(message: string) {
   toast.success(`${ message }`, {
-    style: {
-      background: '#1e293b',
-      color: '#cbd5e1',
-    },
+    className: 'bg-white font-inter dark:bg-slate-800 dark:text-slate-300'
   });
 }
 
 export function errorNotification(message: string) {
   toast.success(`${ message }`, {
-    style: {
-      background: '#1e293b',
-      color: '#cbd5e1',
-    },
+    className: 'bg-white font-inter dark:bg-slate-800 dark:text-slate-300'
   });
 }
 
@@ -34,7 +28,7 @@ export function confirmNotification({ title }: ConfirmNotificationProps): Promis
     focusCancel: true,
     buttonsStyling: false,
     customClass: {
-      popup: 'dark:bg-slate-800 text-gray-700 font-inter dark:text-slate-300',
+      popup: 'dark:bg-slate-800 text-gray-800 font-inter dark:text-slate-300',
       confirmButton: 'py-2 px-3 bg-red-400 text-white rounded-lg',
       cancelButton: 'py-2 px-3 bg-gray-50 text-gray-400 rounded-lg dark:bg-slate-700 dark:text-slate-300 ml-4',
     },

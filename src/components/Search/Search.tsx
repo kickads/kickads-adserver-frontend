@@ -24,7 +24,7 @@ export function Search({ handleSearchChange }: Props) {
             type="text"
             name="text"
             id="text"
-            className="block w-full rounded-l-md border-0 py-1.5 pl-10 text-gray-900 focus:outline-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300 dark:ring-slate-700"
+            className="block w-full rounded-l-md border-0 py-1.5 pl-10 text-gray-900 focus:outline-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300 dark:ring-0"
             placeholder="Buscar o crear"
             autoComplete="off"
             value={ searchItem }
@@ -35,14 +35,14 @@ export function Search({ handleSearchChange }: Props) {
           />
         </div>
         <button
-          className={ `bg-black w-10 flex items-center justify-center ${ searchItem.length < 1 && 'opacity-75 cursor-not-allowed' } rounded-r-md` }
+          className={ `bg-black w-10 flex items-center justify-center ${ searchItem.length < 1 && 'opacity-75 cursor-not-allowed' } rounded-r-md dark:bg-slate-700` }
           disabled={ searchItem.length < 1 }
           onClick={ () => {
             handleCrudCreate(searchItem);
             setSearchItem('');
           }}
         >
-          <PlusIcon className="h-4 stroke-white" />
+          <PlusIcon className="h-4 stroke-white dark:stroke-slate-300" />
         </button>
       </div>
     </div>
