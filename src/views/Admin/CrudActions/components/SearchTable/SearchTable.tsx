@@ -1,6 +1,9 @@
 import { SearchItem } from '../SearchItem/SearchItem.tsx';
+import { useCrud } from '../../hooks/useCrud.ts';
 export interface Props {
   searchItems: SearchItem[];
+  path: string,
+  myQueryKey: string
 }
 
 interface SearchItem {
@@ -8,7 +11,12 @@ interface SearchItem {
   name: string;
 }
 
-export function SearchTable({ searchItems }: Props) {
+export function SearchTable({ searchItems, path, myQueryKey }: Props) {
+  const { handleDelete, setShowInputInUpdate, showInputInUpdate, handleOnChange, handleUpdate, crudFieldOnUpdate } = useCrud({
+    path: path,
+    myQueryKey: myQueryKey
+  });
+
   return (
     <div className="h-[calc(100vh-108px)] overflow-auto">
       <table className="w-full max-w-md mx-auto">
@@ -19,7 +27,18 @@ export function SearchTable({ searchItems }: Props) {
         </tr>
         </thead>
         <tbody>
-        { searchItems.map(searchItem => <SearchItem item={ searchItem } key={ searchItem.id } />) }
+        { searchItems.map(searchItem =>
+          <SearchItem
+            item={ searchItem }
+            key={ searchItem.id }
+            handleDelete={ handleDelete }
+            setShowInputInUpdate={ setShowInputInUpdate }
+            showInputInUpdate={ showInputInUpdate }
+            handleOnChange={ handleOnChange }
+            handleUpdate={ handleUpdate }
+            crudFieldOnUpdate={ crudFieldOnUpdate }
+          />
+        )}
         </tbody>
       </table>
     </div>

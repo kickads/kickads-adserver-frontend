@@ -22,7 +22,7 @@ export function Countries() {
       <Await resolve={ loaderData.countries }>
         <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
-          <SearchTable searchItems={ search } />
+          <SearchTable searchItems={ search } path="countries" myQueryKey="countries" />
         </div>
       </Await>
     </Suspense>
