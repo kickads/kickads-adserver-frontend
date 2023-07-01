@@ -2,15 +2,14 @@ import { Suspense, useEffect } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
+import { useStore } from '../../../../state/store/store.tsx';
 import { Search } from '../../../../components/Search/Search.tsx';
 import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
 import { Loader } from '../../../../components/Loader/Loader.tsx';
 import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllEntities } from '../../../../services/entities/entities.services.ts';
-import { useStore } from '../../../../state/store/store.tsx';
 import { successNotification } from '../../../../services/notification/notification.services.ts';
-import { getCookie } from '../../../../helpers/Cookies/cookies.helper.ts';
-import { axiosInstance } from '../../../../config/axios/axios.config.ts';
+import { createItem, deleteItem, updateItem } from '../services/crudActions.services.ts';
 
 export interface Data {
   entities: [];
@@ -26,13 +25,15 @@ export function Entities() {
   const { data } = useQuery({ queryKey: [ 'entities' ], queryFn: getAllEntities });
   const { search, handleSearchChange } = useSearchByName(data ?? []);
 
+  const userToken = useStore(state => state.userToken);
   const setCrudPath = useStore(state => state.setCrudPath);
   const setCrudQueryKey = useStore(state => state.setCrudQueryKey);
   const setCrudMutationDelete = useStore(state => state.setCrudMutationDelete);
   const setCrudMutationUpdate = useStore(state => state.setCrudMutationUpdate);
+  const setCrudMutationCreate = useStore(state => state.setCrudMutationCreate);
 
   const mutationCrudDelete = useMutation({
-    mutationFn: (id: number) => deleteItem('entities', id),
+    mutationFn: (id: number) => deleteItem({ userToken, id, path: 'entities' }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [ 'entities' ]
@@ -43,7 +44,7 @@ export function Entities() {
   });
 
   const mutationCrudUpdate = useMutation({
-    mutationFn: (item: ItemModel) => updateItem('entities', item),
+    mutationFn: (item: ItemModel) => updateItem({ userToken, item, path: 'entities' }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [ 'entities' ]
@@ -53,11 +54,24 @@ export function Entities() {
     }
   });
 
+  const mutationCrudCreate = useMutation({
+    mutationFn: (name: string) => createItem({ userToken, name, path: 'entities' }),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ 'entities' ]
+      });
+
+      successNotification('Creado');
+    }
+  });
+
+
   useEffect(() => {
     setCrudPath('countries');
     setCrudQueryKey('countries');
     setCrudMutationDelete(mutationCrudDelete);
     setCrudMutationUpdate(mutationCrudUpdate);
+    setCrudMutationCreate(mutationCrudCreate);
   }, []);
 
   return (
@@ -78,25 +92,5 @@ export async function getAllEntitiesLoader() {
       queryKey: [ 'entities' ],
       queryFn: getAllEntities
     })
-  });
-}
-
-async function deleteItem(path: string, id: number) {
-  const userToken = JSON.parse(getCookie('userToken') ?? '');
-
-  await axiosInstance.delete(`${ path }/${ id }`, {
-    headers: {
-      'Authorization': `Bearer ${ userToken }`
-    }
-  });
-}
-
-async function updateItem(path: string, item: ItemModel) {
-  const userToken = JSON.parse(getCookie('userToken') ?? '');
-
-  await axiosInstance.patch(`${ path }/${ item.id }`, { name: item.name }, {
-    headers: {
-      'Authorization': `Bearer ${ userToken }`
-    }
   });
 }
