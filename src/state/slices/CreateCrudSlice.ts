@@ -3,29 +3,29 @@ import { CrudSlice } from './models/slices.model.ts';
 import { confirmNotification } from '../../services/notification/notification.services.ts';
 
 export const createCrudSlice: StateCreator<CrudSlice> = (set, get) => ({
+  // BASE CONFIG
   crudPath: '',
-  crudQueryKey: '',
   setCrudPath: (path) => {
     set(() => ({ crudPath: path }));
   },
+  crudQueryKey: '',
   setCrudQueryKey: (crudQueryKey) => {
     set(() => ({ crudQueryKey: crudQueryKey }));
+  },
+  // CRUD DELETE
+  crudMutationDelete: '',
+  setCrudMutationDelete: (mutationDelete) => {
+    set(() => ({ crudMutationDelete: mutationDelete }));
   },
   handleCrudDelete: (item, mutationDelete) => {
     confirmNotification({ title: item.name }).then(result => {
       (result.isConfirmed) && mutationDelete.mutate(item.id);
     });
   },
-  crudMutationDelete: '',
-  setCrudMutationDelete: (mutationDelete) => {
-    set(() => ({ crudMutationDelete: mutationDelete }));
-  },
-  showInputInUpdate: {
-    id: null,
-    isShow: false
-  },
-  setShowInputInUpdate: (showInputInUpdate) => {
-    set(() => ({ showInputInUpdate }));
+  // CRUD UPDATE
+  crudMutationUpdate: '',
+  setCrudMutationUpdate: (mutationUpdate) => {
+    set(() => ({ crudMutationUpdate: mutationUpdate }));
   },
   handleCrudUpdate: (e, id) => {
     e.preventDefault();
@@ -40,19 +40,25 @@ export const createCrudSlice: StateCreator<CrudSlice> = (set, get) => ({
       showInputInUpdate: { id: null, isShow: false }
     }));
   },
-  crudMutationUpdate: '',
-  setCrudMutationUpdate: (mutationUpdate) => {
-    set(() => ({ crudMutationUpdate: mutationUpdate }));
+  // CRUD CREATE
+  crudMutationCreate: '',
+  setCrudMutationCreate: (mutationCreate) => {
+    set(() => ({ crudMutationCreate: mutationCreate }));
   },
+  handleCrudCreate: (name) => {
+    get().crudMutationCreate.mutate(name);
+  },
+  // INPUT CHANGE
   crudFieldOnUpdate: '',
   handleCrudFieldOnChange: (e: React.ChangeEvent<HTMLInputElement>) => {
     set(() => ({ crudFieldOnUpdate: e.target.value }));
   },
-  crudMutationCreate: '',
-  handleCrudCreate: (name) => {
-    get().crudMutationCreate.mutate(name);
+  // SHOW INPUT UPDATE
+  showInputInUpdate: {
+    id: null,
+    isShow: false
   },
-  setCrudMutationCreate: (mutationCreate) => {
-    set(() => ({ crudMutationCreate: mutationCreate }));
-  }
+  setShowInputInUpdate: (showInputInUpdate) => {
+    set(() => ({ showInputInUpdate }));
+  },
 });

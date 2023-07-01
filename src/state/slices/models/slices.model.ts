@@ -14,19 +14,19 @@ export interface CrudSlice {
   setCrudPath: (path: string) => void,
   crudQueryKey: string,
   setCrudQueryKey: (crudQueryKey: string) => void,
-  handleCrudDelete: (item: CrudItemModel, mutationDelete: UseMutationResult) => void,
   crudMutationDelete: any,
   setCrudMutationDelete: (mutationDelete: any) => void,
-  showInputInUpdate: ShowInputInUpdateModel
-  setShowInputInUpdate: (showInputInUpdate: ShowInputInUpdateModel) => void
-  handleCrudUpdate: (e: React.FormEvent<HTMLFormElement>, id: number) => void,
+  handleCrudDelete: (item: CrudItemModel, mutationDelete: UseMutationResult) => void,
   crudMutationUpdate: any,
   setCrudMutationUpdate: (mutationUpdate: any) => void,
-  handleCrudFieldOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  crudFieldOnUpdate: string,
+  handleCrudUpdate: (e: React.FormEvent<HTMLFormElement>, id: number) => void,
   crudMutationCreate: any,
-  handleCrudCreate: (name: string) => void
   setCrudMutationCreate: (mutationCreate: any) => void,
+  handleCrudCreate: (name: string) => void
+  crudFieldOnUpdate: string,
+  handleCrudFieldOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  showInputInUpdate: ShowInputInUpdateModel
+  setShowInputInUpdate: (showInputInUpdate: ShowInputInUpdateModel) => void
 }
 
 interface CrudItemModel {
