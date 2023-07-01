@@ -1,13 +1,13 @@
+import { Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useSearchByName } from '../../../../hooks/useSearch.ts';
-import { useCrudMutation } from '../hooks/useCrudMutation.ts';
-import { Suspense } from 'react';
-import { Loader } from '../../../../components/Loader/Loader.tsx';
+import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
 import { Search } from '../../../../components/Search/Search.tsx';
 import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
-import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
+import { Loader } from '../../../../components/Loader/Loader.tsx';
+import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllCompanies } from '../../../../services/companies/company.services.ts';
+import { useCrudMutation } from '../hooks/useCrudMutation.ts';
 
 export interface Data {
   companies: [];
