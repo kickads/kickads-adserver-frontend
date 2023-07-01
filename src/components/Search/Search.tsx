@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { useStore } from '../../state/store/store.tsx';
 
 interface Props {
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export function Search({ handleSearchChange }: Props) {
+  const handleCrudCreate = useStore(state => state.handleCrudCreate);
+  const [ searchItem, setSearchItem ] = useState('');
+
   return (
     <div className="max-w-md w-full mx-auto">
       <label htmlFor="text" className="sr-only">
@@ -22,10 +27,21 @@ export function Search({ handleSearchChange }: Props) {
             className="block w-full rounded-l-md border-0 py-1.5 pl-10 text-gray-900 focus:outline-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300 dark:ring-slate-700"
             placeholder="Buscar o crear"
             autoComplete="off"
-            onChange={ handleSearchChange }
+            value={ searchItem }
+            onChange={ (e) => {
+              handleSearchChange(e);
+              setSearchItem(e.target.value);
+            }}
           />
         </div>
-        <button className="bg-black w-10 flex items-center justify-center rounded-r-md">
+        <button
+          className={ `bg-black w-10 flex items-center justify-center ${ searchItem.length < 1 && 'opacity-75 cursor-not-allowed' } rounded-r-md` }
+          disabled={ searchItem.length < 1 }
+          onClick={ () => {
+            handleCrudCreate(searchItem);
+            setSearchItem('');
+          }}
+        >
           <PlusIcon className="h-4 stroke-white" />
         </button>
       </div>

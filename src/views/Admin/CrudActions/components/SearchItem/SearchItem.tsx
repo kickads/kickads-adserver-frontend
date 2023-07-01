@@ -2,25 +2,10 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-
-interface ItemModel {
-  id: number;
-  name: string;
-}
-
-interface ShowInputInUpdateModel {
-  id: number | null,
-  isShow: boolean
-}
+import { useStore } from '../../../../../state/store/store.tsx';
 
 interface SearchItemProps {
   item: SearchItem;
-  handleDelete: (item: ItemModel) => void
-  setShowInputInUpdate: ({ id, isShow }: ShowInputInUpdateModel) => void,
-  showInputInUpdate: ShowInputInUpdateModel
-  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  handleUpdate: (e: React.FormEvent<HTMLFormElement>, id: number) => void
-  crudFieldOnUpdate: string
 }
 
 interface SearchItem {
@@ -28,7 +13,14 @@ interface SearchItem {
   name: string;
 }
 
-export function SearchItem({ item, handleDelete, setShowInputInUpdate, showInputInUpdate, handleOnChange, handleUpdate, crudFieldOnUpdate }: SearchItemProps) {
+export function SearchItem({ item }: SearchItemProps) {
+  const crudMutationDelete = useStore(state => state.crudMutationDelete);
+  const handleDeleteZustand = useStore(state => state.handleCrudDelete);
+  const showInputInUpdate = useStore(state => state.showInputInUpdate);
+  const setShowInputInUpdate = useStore(state => state.setShowInputInUpdate);
+  const handleCrudFieldOnChange = useStore(state => state.handleCrudFieldOnChange);
+  const crudFieldOnUpdate = useStore(state => state.crudFieldOnUpdate);
+  const handleCrudUpdate = useStore(state => state.handleCrudUpdate);
 
   return (
     <tr key={ item.id }>
@@ -36,14 +28,14 @@ export function SearchItem({ item, handleDelete, setShowInputInUpdate, showInput
         {
           showInputInUpdate.isShow && showInputInUpdate.id === item.id
             ? <form
-              onSubmit={ (e) => handleUpdate(e, item.id) }
+              onSubmit={ (e) => handleCrudUpdate(e, item.id) }
               className="animate__animated animate__fadeInUp animate__faster flex justify-between items-center gap-2"
             >
               <input
                 type="text"
                 placeholder={ item.name }
                 className="block p-1 px-2 w-full sm:leading-6 rounded-md text-gray-900 bg-gray-50 border placeholder:text-gray-400 sm:text-sm dark:border-slate-700 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300"
-                onChange={ handleOnChange }
+                onChange={ handleCrudFieldOnChange }
               />
               <div className="flex items-center gap-3">
                 <button
@@ -60,7 +52,7 @@ export function SearchItem({ item, handleDelete, setShowInputInUpdate, showInput
         <button onClick={ () => setShowInputInUpdate({ id: item.id, isShow: !showInputInUpdate.isShow }) }>
           <PencilSquareIcon className="h-5 hover:stroke-kickads dark:stroke-slate-400 dark:hover:stroke-kickads"/>
         </button>
-        <button onClick={ () => handleDelete(item) }>
+        <button onClick={ () => handleDeleteZustand(item, crudMutationDelete) }>
           <TrashIcon className="h-5 hover:stroke-red-400 dark:stroke-slate-400 dark:hover:stroke-red-400"/>
         </button>
       </td>
