@@ -21,6 +21,7 @@ interface ShowInputInUpdateModel {
 }
 
 export function useCrud(crudConfig: CrudConfigModel) {
+  const [ crudFieldCreate, setCrudFieldCreate ] = useState('');
   const [ crudFieldOnUpdate, setCrudFieldOnUpdate ] = useState('');
   const [ showInputInUpdate, setShowInputInUpdate ] = useState<ShowInputInUpdateModel>({
     id: null,
@@ -46,6 +47,20 @@ export function useCrud(crudConfig: CrudConfigModel) {
       successNotification('Actualizado');
     }
   });
+  const mutationCreate = useMutation({
+    mutationFn: (name: string) => createItem(crudConfig.path, name),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ `${ crudConfig.myQueryKey }` ]
+      });
+
+      successNotification('Creado');
+    }
+  });
+
+  const handleCreate = () => {
+    mutationCreate.mutate(crudFieldCreate);
+  }
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>, id: number) => {
     e.preventDefault();
@@ -67,6 +82,7 @@ export function useCrud(crudConfig: CrudConfigModel) {
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCrudFieldOnUpdate(e.target.value);
+    setCrudFieldCreate(e.target.value);
   };
 
   return {
@@ -74,6 +90,7 @@ export function useCrud(crudConfig: CrudConfigModel) {
     setShowInputInUpdate,
     handleOnChange,
     handleUpdate,
+    handleCreate,
     showInputInUpdate,
     crudFieldOnUpdate
   };
@@ -96,5 +113,15 @@ async function deleteItem(path: string, id: number) {
     headers: {
       'Authorization': `Bearer ${ userToken }`
     }
+  });
+}
+
+async function createItem(path: string, name: string) {
+  const userToken = JSON.parse(getCookie('userToken') ?? '');
+
+  await axiosInstance.post(`${ path }`, { name }, {
+    headers: {
+      'Authorization': `Bearer ${ userToken }`
+    },
   });
 }
