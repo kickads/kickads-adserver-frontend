@@ -15,13 +15,15 @@ import { Entities, getAllEntitiesLoader } from '../views/Admin/CrudActions/Entit
 import { BusinessModel, getAllBusinessModelsLoader } from '../views/Admin/CrudActions/BusinessModel/BusinessModel.tsx';
 import { getAllPrioritiesLoader, Priorities } from '../views/Admin/CrudActions/Priorities/Priorities.tsx';
 import { Companies, getAllCompaniesLoader } from '../views/Admin/CrudActions/Companies/Companies.tsx';
-import { Currencies } from '../views/Admin/CrudActions/Currencies/Currencies.tsx';
+import { Currencies, getAllCurrenciesLoader } from '../views/Admin/CrudActions/Currencies/Currencies.tsx';
 import { Roles } from '../views/Admin/CrudActions/Roles/Roles.tsx';
 import { CreateCompany } from '../views/Admin/CrudActions/Companies/views/CreateCompany.tsx';
 import {
   EditCompany,
   getAllEntitiesAndCompaniesLoader
 } from '../views/Admin/CrudActions/Companies/views/EditCompany.tsx';
+import { CreateCurrency } from '../views/Admin/CrudActions/Currencies/views/CreateCurrency.tsx';
+import { EditCurrency } from '../views/Admin/CrudActions/Currencies/views/EditCurrency.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,7 +58,12 @@ const router = createBrowserRouter(
               <Route path="edit" element={ <EditCompany /> } loader={ getAllEntitiesAndCompaniesLoader } />
             </Route>
 
-            <Route path="currencies" element={ <Currencies /> } />
+            <Route path="currencies">
+              <Route index element={ <Currencies /> } loader={ getAllCurrenciesLoader } />
+              <Route path="create" element={ <CreateCurrency /> } />
+              <Route path="edit" element={ <EditCurrency /> } loader={ getAllCountriesLoader } />
+            </Route>
+
             <Route path="roles" element={ <Roles /> } />
           </Route>
 
