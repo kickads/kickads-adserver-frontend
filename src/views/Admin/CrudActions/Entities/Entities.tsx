@@ -37,7 +37,7 @@ export function Entities() {
 
 export async function getAllEntitiesLoader() {
   return defer({
-    countries: queryClient.fetchQuery({
+    entities: queryClient.fetchQuery({
       queryKey: [ 'entities' ],
       queryFn: getAllEntities
     })

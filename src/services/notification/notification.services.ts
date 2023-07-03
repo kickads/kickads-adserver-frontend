@@ -28,9 +28,9 @@ export function confirmNotification({ title }: ConfirmNotificationProps): Promis
     focusCancel: true,
     buttonsStyling: false,
     customClass: {
-      popup: 'dark:bg-slate-800 text-gray-800 font-inter dark:text-slate-300',
+      popup: 'text-gray-800 font-inter dark:bg-gray-900 dark:text-gray-300',
       confirmButton: 'py-2 px-3 bg-red-400 text-white rounded-lg',
-      cancelButton: 'py-2 px-3 bg-gray-50 text-gray-400 rounded-lg dark:bg-slate-700 dark:text-slate-300 ml-4',
+      cancelButton: 'py-2 px-3 bg-gray-50 text-gray-400 rounded-lg dark:bg-gray-800 dark:text-gray-300 ml-4',
     },
   });
 }

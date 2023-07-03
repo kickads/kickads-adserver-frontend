@@ -10,4 +10,6 @@ export interface CompanyCollection {
 export interface CompanyModel {
   id: number;
   name: string;
+  entity: string;
+  country: string;
 }

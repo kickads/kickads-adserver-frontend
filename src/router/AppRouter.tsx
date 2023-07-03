@@ -44,7 +44,13 @@ const router = createBrowserRouter(
             <Route path="entities" element={ <Entities /> } loader={ getAllEntitiesLoader }  />
             <Route path="business-model" element={ <BusinessModel /> } loader={ getAllBusinessModelsLoader } />
             <Route path="priorities" element={ <Priorities /> } loader={ getAllPrioritiesLoader } />
-            <Route path="companies" element={ <Companies /> } loader={ getAllCompaniesLoader } />
+
+            <Route path="companies">
+              <Route index element={ <Companies /> } loader={ getAllCompaniesLoader } />
+              <Route path="create" element={ <h1>Create company</h1> } />
+              <Route path="edit" element={ <h1>Edit company</h1> } />
+            </Route>
+
             <Route path="currencies" element={ <Currencies /> } />
             <Route path="roles" element={ <Roles /> } />
           </Route>

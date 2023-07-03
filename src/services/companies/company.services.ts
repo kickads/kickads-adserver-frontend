@@ -4,6 +4,7 @@ import { CompanyResponse } from '../../models/Company/company.model.ts';
 
 export async function getAllCompanies() {
   const userToken = JSON.parse(getCookie('userToken') ?? '');
+
   const { data } = await axiosInstance.get<CompanyResponse>('companies', {
     headers: {
       'Authorization': `Bearer ${ userToken }`
@@ -11,4 +12,14 @@ export async function getAllCompanies() {
   });
 
   return data.data.companies;
+}
+
+export async function deleteCompany(id: number) {
+  const userToken = JSON.parse(getCookie('userToken') ?? '');
+
+  await axiosInstance.delete(`companies/${ id }`, {
+    headers: {
+      'Authorization': `Bearer ${ userToken }`
+    }
+  });
 }

@@ -37,7 +37,7 @@ export function BusinessModel() {
 
 export async function getAllBusinessModelsLoader() {
   return defer({
-    countries: queryClient.fetchQuery({
+    business_models: queryClient.fetchQuery({
       queryKey: [ 'business-models' ],
       queryFn: getAllBusinessModels
     })

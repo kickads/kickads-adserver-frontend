@@ -37,7 +37,7 @@ export function Priorities() {
 
 export async function getAllPrioritiesLoader() {
   return defer({
-    countries: queryClient.fetchQuery({
+    priorities: queryClient.fetchQuery({
       queryKey: [ 'priorities' ],
       queryFn: getAllPriorities
     })

@@ -1,13 +1,13 @@
 import { Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
-import { Search } from '../../../../components/Search/Search.tsx';
-import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
-import { Loader } from '../../../../components/Loader/Loader.tsx';
-import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllCompanies } from '../../../../services/companies/company.services.ts';
-import { useCrudMutation } from '../hooks/useCrudMutation.ts';
+import { useSearchCompany } from './hook/useSearchCompany.ts';
+import { useCompanyQueryMutation } from './hook/useCompanyQueryMutation.ts';
+import { Loader } from '../../../../components/Loader/Loader.tsx';
+import { Search } from './components/Search.tsx';
+import { CompanyTable } from './components/CompanyTable.tsx';
+import { AlertInfo } from '../../../../components/Alerts/AlertInfo.tsx';
+import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
 
 export interface Data {
   companies: [];
@@ -15,20 +15,19 @@ export interface Data {
 
 export function Companies() {
   const loaderData = useLoaderData() as Data;
-  const { data } = useQuery({ queryKey: [ 'companies' ], queryFn: getAllCompanies });
-  const { search, handleSearchChange } = useSearchByName(data ?? []);
-
-  useCrudMutation({
-    crudPath: 'companies',
-    crudQueryKey: 'companies'
-  });
+  const { data } = useCompanyQueryMutation();
+  const { searchCompanies, handleSearchChange } = useSearchCompany(data ?? []);
 
   return (
     <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
       <Await resolve={ loaderData.companies }>
         <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
-          <SearchTable searchItems={ search } />
+          {
+            searchCompanies.length
+              ? <CompanyTable companies={ searchCompanies } />
+              : <AlertInfo text="No se encontraron companias." />
+          }
         </div>
       </Await>
     </Suspense>
@@ -37,7 +36,7 @@ export function Companies() {
 
 export async function getAllCompaniesLoader() {
   return defer({
-    countries: queryClient.fetchQuery({
+    companies: queryClient.fetchQuery({
       queryKey: [ 'companies' ],
       queryFn: getAllCompanies
     })
