@@ -4,7 +4,7 @@ import {
   BriefcaseIcon,
   BuildingOffice2Icon,
   CubeIcon,
-  CurrencyDollarIcon, FingerPrintIcon, HomeIcon,
+  CurrencyDollarIcon, FingerPrintIcon, FlagIcon, HomeIcon,
   Square3Stack3DIcon
 } from '@heroicons/react/24/outline';
 
@@ -12,7 +12,7 @@ const crudItems = [
   {
     name: 'Countries',
     path: '/admin/crud-actions',
-    icon: CurrencyDollarIcon
+    icon: FlagIcon
   },
   {
     name: 'Entities',

@@ -38,6 +38,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-hook-form:
+    specifier: 7.45.1
+    version: 7.45.1(react@18.2.0)
   react-hot-toast:
     specifier: 2.4.1
     version: 2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
@@ -45,10 +48,10 @@ dependencies:
     specifier: 6.12.0
     version: 6.12.0(react-dom@18.2.0)(react@18.2.0)
   sweetalert2:
-    specifier: ^11.7.12
+    specifier: 11.7.12
     version: 11.7.12
   sweetalert2-react-content:
-    specifier: ^5.0.7
+    specifier: 5.0.7
     version: 5.0.7(react-dom@18.2.0)(react@18.2.0)(sweetalert2@11.7.12)
   zustand:
     specifier: ^4.3.8
@@ -1806,6 +1809,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form@7.45.1(react@18.2.0):
+    resolution: {integrity: sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-hot-toast@2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0):

@@ -1,7 +1,25 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { deleteCompany, getAllCompanies } from '../../../../../services/companies/company.services.ts';
-import { successNotification } from '../../../../../services/notification/notification.services.ts';
 import { queryClient } from '../../../../../providers/ReactQueryProvider.tsx';
+import {
+  createCompany,
+  deleteCompany,
+  getAllCompanies,
+  updateCompany
+} from '../../../../../services/companies/company.services.ts';
+import { successNotification } from '../../../../../services/notification/notification.services.ts';
+
+interface CreateCompany {
+  name: string;
+  entity_id: number;
+  country_id: number;
+}
+
+interface UpdateCompany {
+  id: number,
+  name: string;
+  entity_id: number;
+  country_id: number;
+}
 
 export function useCompanyQueryMutation() {
   const { data } = useQuery({ queryKey: [ 'companies' ], queryFn: getAllCompanies });
@@ -17,27 +35,27 @@ export function useCompanyQueryMutation() {
     }
   });
 
-  // const mutationCrudUpdate = useMutation({
-  //   mutationFn: (item: ItemModel) => updateItem({ userToken, item, path: crudPath }),
-  //   onSuccess: async () => {
-  //     await queryClient.invalidateQueries({
-  //       queryKey: [ crudQueryKey ]
-  //     });
-  //
-  //     successNotification('Actualizado');
-  //   }
-  // });
+  const mutationCompanyUpdate = useMutation({
+    mutationFn: (company: UpdateCompany) => updateCompany(company),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ 'companies' ]
+      });
 
-  // const mutationCrudCreate = useMutation({
-  //   mutationFn: (name: string) => createItem({ userToken, name, path: crudPath }),
-  //   onSuccess: async () => {
-  //     await queryClient.invalidateQueries({
-  //       queryKey: [ crudQueryKey ]
-  //     });
-  //
-  //     successNotification('Creado');
-  //   }
-  // });
+      successNotification('Actualizado');
+    }
+  });
 
-  return { data, mutationCompanyDelete }
+  const mutationCompanyCreate = useMutation({
+    mutationFn: (company: CreateCompany) => createCompany(company),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: [ 'companies' ]
+      });
+
+      successNotification('Creado');
+    }
+  });
+
+  return { data, mutationCompanyDelete, mutationCompanyCreate, mutationCompanyUpdate }
 }

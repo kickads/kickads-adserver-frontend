@@ -1,10 +1,10 @@
-import { PencilSquareIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
 import {
   confirmNotification,
 } from '../../../../../services/notification/notification.services.ts';
-import { CompanyCollection, CompanyModel } from '../../../../../models/Company/company.model.ts';
 import { useCompanyQueryMutation } from '../hook/useCompanyQueryMutation.ts';
-import { Link } from 'react-router-dom';
+import { CompanyCollection, CompanyModel } from '../../../../../models/Company/company.model.ts';
 
 const tableTitles: string[] = [ 'name', 'entity', 'country', 'acciones' ]
 
@@ -18,7 +18,7 @@ export function CompanyTable({ companies }: CompanyCollection) {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="relative h-[calc(100vh-108px)] overflow-auto px-4 sm:px-6 lg:px-8">
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -52,15 +52,12 @@ export function CompanyTable({ companies }: CompanyCollection) {
                       { company.country }
                     </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 space-x-2">
-                      <Link className="inline-block" to="edit">
+                      <Link className="inline-block" to="edit" state={ company }>
                         <PencilSquareIcon className="h-5 stroke-gray-500 hover:stroke-gray-900 dark:stroke-slate-300 dark:hover:stroke-slate-400" />
                       </Link>
                       <button onClick={ () => handleDeleteCompany(company) }>
                         <TrashIcon className="h-5 stroke-gray-500 hover:stroke-gray-900 dark:stroke-gray-300 dark:hover:stroke-gray-400" />
                       </button>
-                      <Link className="inline-block" to="create">
-                        <PlusIcon className="h-5 stroke-gray-500 hover:stroke-gray-900 dark:stroke-gray-300 dark:hover:stroke-gray-400" />
-                      </Link>
                     </td>
                   </tr>
                 ))
