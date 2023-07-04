@@ -36,6 +36,8 @@ export function SearchItem({ item }: SearchItemProps) {
                 placeholder={ item.name }
                 className="block p-1 px-2 w-full sm:leading-6 rounded-md text-gray-900 bg-gray-50 border placeholder:text-gray-400 sm:text-sm dark:border-slate-700 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300"
                 onChange={ handleCrudFieldOnChange }
+                required
+                pattern="[a-zA-Z ]{2,50}"
               />
               <div className="flex items-center gap-3">
                 <button
