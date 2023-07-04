@@ -6,6 +6,7 @@ import { UsersTable } from './components/UsersTable.tsx';
 import { UserSearchBar } from './components/UserSearchBar.tsx';
 import { getAllUsers } from '../../../services/user/user.services.ts';
 import { queryClient } from '../../../providers/ReactQueryProvider.tsx';
+import { AlertInfo } from '../../../components/Alerts/AlertInfo.tsx';
 import { User } from '../../../models/User/user.model.ts';
 
 export interface UsersResponse {
@@ -32,9 +33,13 @@ export function AdminUsers() {
       <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
         <Await resolve={ loaderData.users }>
           { (users) => (
-            <div className="animate__animated animate__fadeIn">
+            <div className="animate__animated animate__fadeIn flex flex-col gap-4">
               <UserSearchBar setUsersFiltered={ setUsersFiltered } users={ users }/>
-              <UsersTable users={ usersFiltered } />
+              {
+                usersFiltered.length
+                  ? <UsersTable users={ usersFiltered } />
+                  : <AlertInfo text="No se encontraron coincidencias." />
+              }
             </div>
           ) }
         </Await>

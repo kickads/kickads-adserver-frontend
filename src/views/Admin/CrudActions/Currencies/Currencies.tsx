@@ -28,7 +28,7 @@ export function Currencies() {
           {
             searchCurrencies.length
               ? <CurrencyTable currencies={ searchCurrencies } />
-              : <AlertInfo text="No se encontraron currencies" />
+              : <AlertInfo text="No se encontraron coincidencias." />
           }
         </div>
         <RedirectButton
