@@ -24,7 +24,7 @@ export function SearchItem({ item }: SearchItemProps) {
 
   return (
     <tr key={ item.id }>
-      <td className="py-3 text-sm font-medium">
+      <td className="py-4 text-sm font-medium">
         {
           showInputInUpdate.isShow && showInputInUpdate.id === item.id
             ? <form
@@ -48,7 +48,7 @@ export function SearchItem({ item }: SearchItemProps) {
             : <div className="font-medium text-gray-900 dark:text-white px-2">{ item.name }</div>
         }
       </td>
-      <td className="flex items-center justify-end gap-3 whitespace-nowrap py-4 text-sm text-gray-500">
+      <td className="h-[4.25rem] flex items-center justify-end gap-3 whitespace-nowrap py-4 text-sm text-gray-500">
         <button onClick={ () => setShowInputInUpdate({ id: item.id, isShow: !showInputInUpdate.isShow }) }>
           <PencilSquareIcon className="h-5 stroke-gray-500 hover:stroke-gray-900 dark:stroke-gray-300 dark:hover:stroke-gray-400"/>
         </button>

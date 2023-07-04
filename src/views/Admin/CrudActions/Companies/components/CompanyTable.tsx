@@ -6,7 +6,7 @@ import {
 import { useCompanyQueryMutation } from '../hook/useCompanyQueryMutation.ts';
 import { CompanyCollection, CompanyModel } from '../../../../../models/Company/company.model.ts';
 
-const tableTitles: string[] = [ 'name', 'entity', 'country', 'acciones' ]
+const tableTitles: string[] = [ 'name', 'entity', 'country', 'acciones' ];
 
 export function CompanyTable({ companies }: CompanyCollection) {
   const { mutationCompanyDelete } = useCompanyQueryMutation();

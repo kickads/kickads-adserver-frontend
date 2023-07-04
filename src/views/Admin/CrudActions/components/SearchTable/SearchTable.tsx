@@ -1,4 +1,5 @@
 import { SearchItem } from '../SearchItem/SearchItem.tsx';
+
 export interface Props {
   searchItems: SearchItem[];
 }
@@ -18,7 +19,7 @@ export function SearchTable({ searchItems }: Props) {
           <th className="py-3 px-2 text-left">Acciones</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
         { searchItems.map(searchItem =>
           <SearchItem item={ searchItem } key={ searchItem.id } />
         )}
