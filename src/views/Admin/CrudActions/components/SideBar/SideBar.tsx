@@ -7,6 +7,8 @@ import {
   CurrencyDollarIcon, FingerPrintIcon, FlagIcon, HomeIcon,
   Square3Stack3DIcon
 } from '@heroicons/react/24/outline';
+import { useStore } from '../../../../../state/store/store.tsx';
+import { axiosInstance } from '../../../../../config/axios/axios.config.ts';
 import { SwitchSchemeColorMode } from '../../../../../components/Utils/SwitchSchemeColorMode.tsx';
 
 const crudItems = [
@@ -48,6 +50,19 @@ const crudItems = [
 ];
 
 export function SideBar() {
+  const userToken = useStore(state => state.userToken);
+  const removeUserAuth = useStore(state => state.removeUserAuth);
+
+  const logout = async () => {
+    await axiosInstance.post('auth/logout', {}, {
+      headers: {
+        'Authorization': `Bearer ${ userToken }`
+      }
+    });
+
+    removeUserAuth();
+  }
+
   return (
     <div className="flex flex-col h-full justify-between">
       <nav>
@@ -82,14 +97,10 @@ export function SideBar() {
             </NavLink>
           </li>
           <li className="rounded-lg overflow-hidden">
-            <NavLink
-              to="/admin"
-              className={ ({ isActive }) => `py-2 px-3 flex gap-2 group hover:text-kickads hover:bg-gray-50 dark:hover:bg-slate-800 ${ isActive && 'bg-gray-50 dark:bg-slate-800'}`}
-              end
-            >
+            <button className="py-2 px-3 flex gap-2 w-full group hover:text-kickads hover:bg-gray-50 dark:hover:bg-slate-800" onClick={ logout }>
               <ArrowLeftOnRectangleIcon className="h-6 stroke-gray-400 group-hover:stroke-kickads dark:stroke-slate-500" />
               <span className="text-sm  text-gray-700 font-inter font-[600] leading-6 group-hover:text-kickads dark:text-slate-300">Logout</span>
-            </NavLink>
+            </button>
           </li>
           <li className="rounded-lg text-right">
             <SwitchSchemeColorMode />
