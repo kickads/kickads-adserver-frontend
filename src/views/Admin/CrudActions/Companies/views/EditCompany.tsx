@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Await, defer, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
 import { queryClient } from '../../../../../providers/ReactQueryProvider.tsx';
 import { useCompanyQueryMutation } from '../hook/useCompanyQueryMutation.ts';
 import { getAllEntities } from '../../../../../services/entities/entities.services.ts';
@@ -42,60 +43,89 @@ export function EditCompany() {
 
   return (
     <>
-      <button onClick={ () => navigate(-1) }>Volver</button>
-      <form action="#" onSubmit={ handleSubmit(onSubmit) }>
+      <button
+        className="flex items-center justify-center gap-3 px-4 py-2 bg-gray-50 text-gray-500 font-inter text-sm rounded-lg hover:text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-200"
+        onClick={ () => navigate(-1) }
+      >
+        <ArrowUturnLeftIcon className="h-4" />
+        Volver
+      </button>
+      <div>
+        <form
+          action="#"
+          className="max-w-md mx-auto font-inter space-y-6"
+          onSubmit={ handleSubmit(onSubmit) }
+        >
 
-        <div>
-          <label htmlFor="name">Nombre</label>
-          <input
-            type="text"
-            id="name"
-            value={ company.name }
-            { ...register('name') }
-          />
-        </div>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Nombre</label>
+            <div className="mt-2">
+              <input
+                type="text"
+                id="name"
+                placeholder={ company.name }
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                { ...register('name', { value: company.name }) }
+              />
+            </div>
+          </div>
 
-        <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
-          <Await resolve={ entities }>
-            {
-              (entities: EntityModel[]) => (
-                <div>
-                  <label htmlFor="entity_id">Entity</label>
-                  <select id="entity_id" defaultValue={ company.entity_id } { ...register('entity_id') }
-                  >
-                    {
-                      entities.map(entity => (
-                        <option
-                          value={ entity.id }
-                          key={ entity.id }
-                        >{ entity.name }</option>
-                      ))
-                    }
-                  </select>
-                </div>
-              )
-            }
-          </Await>
-        </Suspense>
-        <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
-          <Await resolve={ countries }>
-            {
-              (countries: CompanyModel[]) => (
-                <div>
-                  <label htmlFor="country_id">Country</label>
-                  <select id="country_id" defaultValue={ company.country_id } { ...register('country_id') }
-                  >
-                    {
-                      countries?.map(country => <option value={ country.id } key={ country.id }>{ country.name }</option>)
-                    }
-                  </select>
-                </div>
-              )
-            }
-          </Await>
-        </Suspense>
-        <button>Guardar</button>
-      </form>
+          <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
+            <Await resolve={ entities }>
+              {
+                (entities: EntityModel[]) => (
+                  <div>
+                    <label htmlFor="entity_id" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Entity</label>
+                    <div className="mt-2">
+                      <select
+                        id="entity_id"
+                        defaultValue={ company.entity_id }
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                        { ...register('entity_id') }
+                      >
+                        {
+                          entities.map(entity => (
+                            <option
+                              value={ entity.id }
+                              key={ entity.id }
+                            >{ entity.name }</option>
+                          ))
+                        }
+                      </select>
+                    </div>
+                  </div>
+                )
+              }
+            </Await>
+          </Suspense>
+          <Suspense fallback={ <Loader className="h-6 stroke-slate-300 animate-spin mx-auto" /> }>
+            <Await resolve={ countries }>
+              {
+                (countries: CompanyModel[]) => (
+                  <div>
+                    <label htmlFor="country_id" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Country</label>
+                    <div className="mt-2">
+                      <select
+                        id="country_id"
+                        defaultValue={ company.country_id }
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                        { ...register('country_id') }
+                      >
+                        {
+                          countries?.map(country => <option value={ country.id } key={ country.id }>{ country.name }</option>)
+                        }
+                      </select>
+                    </div>
+                  </div>
+                )
+              }
+            </Await>
+          </Suspense>
+          <div>
+            <button className="flex w-full justify-center rounded-md bg-kickads px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kickads dark:bg-kickads">Guardar</button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

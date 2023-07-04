@@ -23,6 +23,8 @@ export default {
       exo: [ 'Exo', ...defaultTheme.fontFamily.sans ]
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };
 

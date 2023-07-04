@@ -7,6 +7,7 @@ import {
   CurrencyDollarIcon, FingerPrintIcon, FlagIcon, HomeIcon,
   Square3Stack3DIcon
 } from '@heroicons/react/24/outline';
+import { SwitchSchemeColorMode } from '../../../../../components/Utils/SwitchSchemeColorMode.tsx';
 
 const crudItems = [
   {
@@ -69,7 +70,7 @@ export function SideBar() {
       </nav>
 
       <nav>
-        <ul className="flex-1">
+        <ul className="flex flex-col gap-1 flex-1">
           <li className="rounded-lg overflow-hidden">
             <NavLink
               to="/admin"
@@ -89,6 +90,9 @@ export function SideBar() {
               <ArrowLeftOnRectangleIcon className="h-6 stroke-gray-400 group-hover:stroke-kickads dark:stroke-slate-500" />
               <span className="text-sm  text-gray-700 font-inter font-[600] leading-6 group-hover:text-kickads dark:text-slate-300">Logout</span>
             </NavLink>
+          </li>
+          <li className="rounded-lg text-right">
+            <SwitchSchemeColorMode />
           </li>
         </ul>
       </nav>
