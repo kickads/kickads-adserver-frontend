@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
 import { Search } from '../../../../components/Search/Search.tsx';
 import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
@@ -30,10 +29,6 @@ export function Entities() {
       <Await resolve={ loaderData.entities }>
         <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
-          <span className="flex justify-center gap-1 text-xs font-inter">
-            <InformationCircleIcon className="h-4 stroke-amber-500" />
-            <p className="dark:text-gray-300">Solo valores a la A-Z y mínimo 1 carácter.</p>
-          </span>
           {
             search.length
               ? <SearchTable searchItems={ search } />
