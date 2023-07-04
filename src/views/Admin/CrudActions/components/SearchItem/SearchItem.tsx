@@ -50,10 +50,10 @@ export function SearchItem({ item }: SearchItemProps) {
       </td>
       <td className="flex items-center justify-end gap-3 whitespace-nowrap py-4 text-sm text-gray-500">
         <button onClick={ () => setShowInputInUpdate({ id: item.id, isShow: !showInputInUpdate.isShow }) }>
-          <PencilSquareIcon className="h-5 hover:stroke-kickads dark:stroke-slate-400 dark:hover:stroke-kickads"/>
+          <PencilSquareIcon className="h-5 stroke-gray-500 hover:stroke-gray-900 dark:stroke-gray-300 dark:hover:stroke-gray-400"/>
         </button>
         <button onClick={ () => handleDeleteZustand(item, crudMutationDelete) }>
-          <TrashIcon className="h-5 hover:stroke-red-400 dark:stroke-slate-400 dark:hover:stroke-red-400"/>
+          <TrashIcon className="h-5 stroke-gray-500 hover:stroke-gray-900 dark:stroke-gray-300 dark:hover:stroke-gray-400"/>
         </button>
       </td>
     </tr>
