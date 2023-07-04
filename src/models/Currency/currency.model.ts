@@ -10,7 +10,7 @@ export interface CurrencyCollection {
 export interface CurrencyModel {
   id: number;
   price: number;
-  name: string;
+  acronym: string;
   country: string;
   country_id: number | string;
 }

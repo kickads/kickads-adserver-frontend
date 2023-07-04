@@ -26,7 +26,7 @@ export async function deleteCurrency(id: number) {
 
 interface CreateCurrency {
   price: number;
-  name: string;
+  acronym: string;
   country_id: number;
 }
 export async function createCurrency(currency: CreateCurrency) {
@@ -42,7 +42,7 @@ export async function createCurrency(currency: CreateCurrency) {
 interface UpdateCurrency {
   id: number,
   price: number;
-  name: string;
+  acronym: string;
   country_id: number;
 }
 export async function updateCurrency(currency: UpdateCurrency) {
@@ -53,4 +53,19 @@ export async function updateCurrency(currency: UpdateCurrency) {
       'Authorization': `Bearer ${ userToken }`
     }
   });
+}
+
+interface AcronymResponse {
+  status: string,
+  data: string[]
+}
+export async function getAllAcronyms() {
+  const userToken = JSON.parse(getCookie('userToken') ?? '');
+  const { data } = await axiosInstance.get<AcronymResponse>('currency-acronyms', {
+    headers: {
+      'Authorization': `Bearer ${ userToken }`
+    }
+  });
+
+  return data.data;
 }

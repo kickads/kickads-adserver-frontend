@@ -9,14 +9,14 @@ import {
 
 interface CreateCurrency {
   price: number;
-  name: string;
+  acronym: string;
   country_id: number;
 }
 
 interface UpdateCurrency {
   id: number,
   price: number;
-  name: string;
+  acronym: string;
   country_id: number;
 }
 

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowUturnLeftIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
 import { axiosInstance } from '../../../../../config/axios/axios.config.ts';
 import { useStore } from '../../../../../state/store/store.tsx';
 import { useCompanyQueryMutation } from '../hook/useCompanyQueryMutation.ts';
@@ -50,7 +50,7 @@ export function CreateCompany() {
   }
 
   return (
-    <>
+    <div className="space-y-6">
       <button
         className="flex items-center justify-center gap-3 px-4 py-2 bg-gray-50 text-gray-500 font-inter text-sm rounded-lg hover:text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-200"
         onClick={ () => navigate(-1) }
@@ -58,6 +58,12 @@ export function CreateCompany() {
         <ArrowUturnLeftIcon className="h-4" />
         Volver
       </button>
+      <div>
+        <span className="flex justify-center gap-1 text-xs font-inter">
+          <InformationCircleIcon className="h-4 stroke-amber-500" />
+          <p className="dark:text-gray-300">Solo valores a la A-Z y mínimo 1 carácter.</p>
+        </span>
+      </div>
       <div>
         <form
           action="#"
@@ -72,6 +78,7 @@ export function CreateCompany() {
                 id="name"
                 placeholder="Escribe un nombre"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                required
                 { ...register('name') }
               />
             </div>
@@ -81,6 +88,7 @@ export function CreateCompany() {
             <div className="mt-2">
               <select
                 id="entity_id"
+                required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
                 { ...register('entity_id') }
               >
@@ -96,6 +104,7 @@ export function CreateCompany() {
             <div className="mt-2">
               <select
                 id="country_id"
+                required
                 { ...register('country_id') }
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
               >
@@ -111,6 +120,6 @@ export function CreateCompany() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }

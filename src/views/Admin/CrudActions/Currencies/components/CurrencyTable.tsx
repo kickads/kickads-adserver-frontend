@@ -6,13 +6,13 @@ import {
 import { useCurrencyQueryMutation } from '../hooks/useCurrencyQueryMutation.ts';
 import { CurrencyCollection, CurrencyModel } from '../../../../../models/Currency/currency.model.ts';
 
-const tableTitles: string[] = [ 'price', 'name', 'country', 'acciones' ]
+const tableTitles: string[] = [ 'price', 'acronym', 'country', 'acciones' ]
 
 export function CurrencyTable({ currencies }: CurrencyCollection) {
   const { mutationCurrencyDelete } = useCurrencyQueryMutation();
 
   const handleDeleteCurrency = (currency: CurrencyModel) => {
-    confirmNotification({ title: currency.name }).then(result => {
+    confirmNotification({ title: currency.acronym }).then(result => {
       (result.isConfirmed) && mutationCurrencyDelete.mutate(currency.id);
     });
   };
@@ -46,7 +46,7 @@ export function CurrencyTable({ currencies }: CurrencyCollection) {
                       { currency.price }
                     </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0 dark:text-gray-300">
-                      { currency.name }
+                      { currency.acronym }
                     </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0 dark:text-gray-300">
                       { currency.country }

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Await, defer, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowUturnLeftIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
 import { queryClient } from '../../../../../providers/ReactQueryProvider.tsx';
 import { useCompanyQueryMutation } from '../hook/useCompanyQueryMutation.ts';
 import { getAllEntities } from '../../../../../services/entities/entities.services.ts';
@@ -42,7 +42,7 @@ export function EditCompany() {
   };
 
   return (
-    <>
+    <div className="space-y-6">
       <button
         className="flex items-center justify-center gap-3 px-4 py-2 bg-gray-50 text-gray-500 font-inter text-sm rounded-lg hover:text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-200"
         onClick={ () => navigate(-1) }
@@ -50,6 +50,12 @@ export function EditCompany() {
         <ArrowUturnLeftIcon className="h-4" />
         Volver
       </button>
+      <div>
+        <span className="flex justify-center gap-1 text-xs font-inter">
+          <InformationCircleIcon className="h-4 stroke-amber-500" />
+          <p className="dark:text-gray-300">Solo valores a la A-Z y mínimo 1 carácter.</p>
+        </span>
+      </div>
       <div>
         <form
           action="#"
@@ -63,6 +69,8 @@ export function EditCompany() {
               <input
                 type="text"
                 id="name"
+                required
+                pattern="[a-zA-Z ]{2,100}"
                 placeholder={ company.name }
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
                 { ...register('name', { value: company.name }) }
@@ -79,6 +87,7 @@ export function EditCompany() {
                     <div className="mt-2">
                       <select
                         id="entity_id"
+                        required
                         defaultValue={ company.entity_id }
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
                         { ...register('entity_id') }
@@ -107,6 +116,7 @@ export function EditCompany() {
                     <div className="mt-2">
                       <select
                         id="country_id"
+                        required
                         defaultValue={ company.country_id }
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
                         { ...register('country_id') }
@@ -126,7 +136,7 @@ export function EditCompany() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

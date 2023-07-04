@@ -9,7 +9,7 @@ export function useSearchCurrency(initialState: CurrencyModel[]) {
   }, [ initialState ]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchCurrencies(initialState.filter(item => item.name.toLowerCase().includes(e.target.value)));
+    setSearchCurrencies(initialState.filter(item => item.acronym.toLowerCase().includes(e.target.value)));
   };
 
   return { searchCurrencies, handleSearchChange };

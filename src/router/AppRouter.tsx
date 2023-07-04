@@ -22,7 +22,10 @@ import {
   EditCompany,
   getAllEntitiesAndCompaniesLoader
 } from '../views/Admin/CrudActions/Companies/views/EditCompany.tsx';
-import { CreateCurrency } from '../views/Admin/CrudActions/Currencies/views/CreateCurrency.tsx';
+import {
+  CreateCurrency,
+  getAllCountriesAndAcronymsLoader
+} from '../views/Admin/CrudActions/Currencies/views/CreateCurrency.tsx';
 import { EditCurrency } from '../views/Admin/CrudActions/Currencies/views/EditCurrency.tsx';
 
 const router = createBrowserRouter(
@@ -60,8 +63,8 @@ const router = createBrowserRouter(
 
             <Route path="currencies">
               <Route index element={ <Currencies /> } loader={ getAllCurrenciesLoader } />
-              <Route path="create" element={ <CreateCurrency /> } />
-              <Route path="edit" element={ <EditCurrency /> } loader={ getAllCountriesLoader } />
+              <Route path="create" element={ <CreateCurrency /> } loader={ getAllCountriesAndAcronymsLoader } />
+              <Route path="edit" element={ <EditCurrency /> } loader={ getAllCountriesAndAcronymsLoader } />
             </Route>
 
             <Route path="roles" element={ <Roles /> } loader={ getAllRolesLoader } />
