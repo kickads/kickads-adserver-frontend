@@ -16,7 +16,7 @@ import { BusinessModel, getAllBusinessModelsLoader } from '../views/Admin/CrudAc
 import { getAllPrioritiesLoader, Priorities } from '../views/Admin/CrudActions/Priorities/Priorities.tsx';
 import { Companies, getAllCompaniesLoader } from '../views/Admin/CrudActions/Companies/Companies.tsx';
 import { Currencies, getAllCurrenciesLoader } from '../views/Admin/CrudActions/Currencies/Currencies.tsx';
-import { Roles } from '../views/Admin/CrudActions/Roles/Roles.tsx';
+import { getAllRolesLoader, Roles } from '../views/Admin/CrudActions/Roles/Roles.tsx';
 import { CreateCompany } from '../views/Admin/CrudActions/Companies/views/CreateCompany.tsx';
 import {
   EditCompany,
@@ -64,7 +64,7 @@ const router = createBrowserRouter(
               <Route path="edit" element={ <EditCurrency /> } loader={ getAllCountriesLoader } />
             </Route>
 
-            <Route path="roles" element={ <Roles /> } />
+            <Route path="roles" element={ <Roles /> } loader={ getAllRolesLoader } />
           </Route>
 
         </Route>

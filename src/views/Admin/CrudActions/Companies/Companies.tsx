@@ -28,7 +28,7 @@ export function Companies() {
           {
             searchCompanies.length
               ? <CompanyTable companies={ searchCompanies } />
-              : <AlertInfo text="No se encontraron companias." />
+              : <AlertInfo text="No se encontraron coincidencias." />
           }
         </div>
         <RedirectButton className="absolute bottom-3 right-3 flex items-center justify-center bg-gray-200 w-11 h-11 rounded-full" redirect="create">

@@ -8,6 +8,7 @@ import { Loader } from '../../../../components/Loader/Loader.tsx';
 import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllPriorities } from '../../../../services/priorities/priorities.services.ts';
 import { useCrudMutation } from '../hooks/useCrudMutation.ts';
+import { AlertInfo } from '../../../../components/Alerts/AlertInfo.tsx';
 
 export interface Data {
   priorities: [];
@@ -28,7 +29,11 @@ export function Priorities() {
       <Await resolve={ loaderData.priorities }>
         <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
-          <SearchTable searchItems={ search } />
+          {
+            search.length
+              ? <SearchTable searchItems={ search } />
+              : <AlertInfo text="No se encontraron coincidencias." />
+          }
         </div>
       </Await>
     </Suspense>

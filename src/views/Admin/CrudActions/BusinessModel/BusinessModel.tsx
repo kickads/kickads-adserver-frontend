@@ -8,6 +8,7 @@ import { Suspense } from 'react';
 import { Loader } from '../../../../components/Loader/Loader.tsx';
 import { Search } from '../../../../components/Search/Search.tsx';
 import { SearchTable } from '../components/SearchTable/SearchTable.tsx';
+import { AlertInfo } from '../../../../components/Alerts/AlertInfo.tsx';
 
 export interface Data {
   business_models: [];
@@ -28,7 +29,11 @@ export function BusinessModel() {
       <Await resolve={ loaderData.business_models }>
         <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
-          <SearchTable searchItems={ search } />
+          {
+            search.length
+              ? <SearchTable searchItems={ search } />
+              : <AlertInfo text="No se encontraron coincidencias." />
+          }
         </div>
       </Await>
     </Suspense>

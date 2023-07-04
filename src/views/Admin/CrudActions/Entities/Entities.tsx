@@ -8,6 +8,7 @@ import { Loader } from '../../../../components/Loader/Loader.tsx';
 import { useSearchByName } from '../../../../hooks/useSearch.ts';
 import { getAllEntities } from '../../../../services/entities/entities.services.ts';
 import { useCrudMutation } from '../hooks/useCrudMutation.ts';
+import { AlertInfo } from '../../../../components/Alerts/AlertInfo.tsx';
 
 interface Data {
   entities: [];
@@ -28,7 +29,11 @@ export function Entities() {
       <Await resolve={ loaderData.entities }>
         <div className="animate__animated animate__fadeIn flex flex-col gap-6">
           <Search handleSearchChange={ handleSearchChange } />
-          <SearchTable searchItems={ search } />
+          {
+            search.length
+              ? <SearchTable searchItems={ search } />
+              : <AlertInfo text="No se encontraron coincidencias." />
+          }
         </div>
       </Await>
     </Suspense>
