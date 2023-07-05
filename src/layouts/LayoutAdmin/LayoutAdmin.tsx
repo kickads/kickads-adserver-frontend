@@ -6,7 +6,7 @@ export function LayoutAdmin() {
   return (
     <>
       <Navbar />
-      <main className="bg-white dark:bg-slate-900">
+      <main className="bg-white dark:bg-gray-900">
         <Wrapper className="px-2">
           <Outlet />
         </Wrapper>

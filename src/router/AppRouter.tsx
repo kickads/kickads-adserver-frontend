@@ -27,6 +27,7 @@ import {
   getAllCountriesAndAcronymsLoader
 } from '../views/Admin/CrudActions/Currencies/views/CreateCurrency.tsx';
 import { EditCurrency } from '../views/Admin/CrudActions/Currencies/views/EditCurrency.tsx';
+import { Creatives } from '../views/Creatives/Creatives.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,7 @@ const router = createBrowserRouter(
 
           <Route element={ <LayoutAdmin /> }>
             <Route index element={ <Home /> } />
+            <Route path="creatives" element={ <Creatives /> } />
             <Route path="users" element={ <AdminUsers /> } loader={ getAllUsersLoader } />
           </Route>
 

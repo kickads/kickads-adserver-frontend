@@ -55,7 +55,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="relative bg-white dark:bg-slate-900">
+    <header className="relative bg-white dark:bg-gray-900">
       <Wrapper className="flex justify-between items-center p-2 wrapper:px-0">
         <div className="hidden lg:block">
           <img src={ getImagePath('logos/logo-kickads.svg') } alt="Logo Kickads" width="40" />
@@ -64,6 +64,9 @@ export function Navbar() {
           <ul className="flex gap-8 text-gray-900 font-bold font-inter">
             <li className="dark:text-white">
               <NavLink to="/">Home</NavLink>
+            </li>
+            <li className="dark:text-white">
+              <NavLink to="creatives">Creatives</NavLink>
             </li>
             <li className="dark:text-white">Sección 2</li>
             <li className="dark:text-white">Sección 3</li>

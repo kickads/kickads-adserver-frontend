@@ -26,6 +26,9 @@ dependencies:
   animate.css:
     specifier: 4.1.1
     version: 4.1.1
+  awesome-react-stepper:
+    specifier: 1.1.1
+    version: 1.1.1(react@18.2.0)
   axios:
     specifier: 1.4.0
     version: 1.4.0
@@ -883,6 +886,14 @@ packages:
       postcss: 8.4.24
       postcss-value-parser: 4.2.0
     dev: true
+
+  /awesome-react-stepper@1.1.1(react@18.2.0):
+    resolution: {integrity: sha512-F2H5dR2tl2xW5a+V6lozc2ReTElPzHGhBO5HF+V/HcM+uWz9RRoVBWis0dNfY+veUc9F3MhHlep3bknLax+6GQ==}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /axios@1.4.0:
     resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
