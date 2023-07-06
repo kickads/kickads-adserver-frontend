@@ -1,6 +1,10 @@
-import Stepper from 'awesome-react-stepper';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Stepper from 'awesome-react-stepper';
+import { addDoc, collection } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { db } from '../../config/firebase/firebase.config.ts';
 
 interface Creative{
   creativeClientName: string,
@@ -12,6 +16,7 @@ interface Creative{
 }
 
 export function Creatives() {
+  const navigate = useNavigate();
   const [ clicks, setClicks ] = useState({});
   const [ interactions, setInteractions ] = useState({});
   const [ enabledButtonStepNextOne, setEnabledButtonStepNextOne ] = useState(true);
@@ -59,11 +64,20 @@ export function Creatives() {
         backBtn={ <ButtonStepPrevious /> }
         submitBtn={ <ButtonStepSave /> }
         allowClickControl={ false }
-        onSubmit={ () => {
-          console.log('creando creativo...');
-          console.log({ creative });
-          console.log({ clicks });
-          console.log({ interactions });
+        onSubmit={ async () => {
+          const docRef = addDoc(collection(db, `creatives/${ creative.creativeClientName }/${ creative.creativeFormatName }`), {
+            ...creative,
+            clicks: Object.fromEntries(Object.values(clicks).map(clicks => ([clicks, 0]))),
+            interactions: Object.fromEntries(Object.values(interactions).map(interaction => ([interaction, 0]))),
+          });
+
+          await toast.promise(docRef, {
+            loading: 'Creando',
+            success: 'Creado',
+            error: 'Error al crear',
+          });
+
+          navigate('/admin')
         }}
       >
         <div>
@@ -191,7 +205,7 @@ function StepTwo({ handleInputChange, creative }: StepTwoProps) {
             name="creativeClicksCant"
             value={ creative.creativeClicksCant ?? 0 }
             onChange={ (e) => handleInputChange(e) }
-            placeholder="Cantidad de clicks"
+            placeholder="0"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
             required
           />
@@ -207,7 +221,7 @@ function StepTwo({ handleInputChange, creative }: StepTwoProps) {
             name="creativeInteractionsCant"
             value={ creative.creativeInteractionsCant ?? 0 }
             onChange={ (e) => handleInputChange(e) }
-            placeholder="Cantidad de interactiones"
+            placeholder="0"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
             required
           />
