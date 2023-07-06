@@ -1,7 +1,51 @@
 import Stepper from 'awesome-react-stepper';
 import { useEffect, useState } from 'react';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+
+interface Creative{
+  creativeClientName: string,
+  creativeFormatName: string,
+  creativeBusinessModel: string,
+  creativeCountry: string,
+  creativeClicksCant?: number,
+  creativeInteractionsCant?: number,
+}
 
 export function Creatives() {
+  const [ clicks, setClicks ] = useState({});
+  const [ interactions, setInteractions ] = useState({});
+  const [ enabledButtonStepNextOne, setEnabledButtonStepNextOne ] = useState(true);
+  const [ creative, setCreative ] = useState<Creative>({
+    creativeClientName: '',
+    creativeFormatName: '',
+    creativeBusinessModel: '',
+    creativeCountry: '',
+    creativeClicksCant: 0,
+    creativeInteractionsCant: 0,
+  });
+
+  useEffect(() => {
+    if (creative.creativeClientName.length && creative.creativeFormatName.length && creative.creativeBusinessModel.length && creative.creativeCountry.length) {
+      setEnabledButtonStepNextOne(false);
+    }
+  }, [ creative ]);
+
+  const handleClicksChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setClicks(oldValue => ({...oldValue, [e.target.name] : e.target.value }))
+  }
+
+  const handleInteractionsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInteractions(oldValue => ({...oldValue, [e.target.name] : e.target.value }))
+  }
+
+  const handleInputSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCreative(oldValue => ({...oldValue, [e.target.name] : e.target.value }))
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCreative(oldValue => ({...oldValue, [e.target.name] : e.target.value }))
+  }
+
   return (
     <div className="min-h-[calc(100vh-64px)] py-6 lg:min-h-[calc(100vh-56px)] max-w-lg mx-auto">
       <Stepper
@@ -11,35 +55,48 @@ export function Creatives() {
         barWidth="200px"
         btnPos="center"
         activeProgressBorder="0px"
-        continueBtn={ <ButtonStepNext /> }
+        continueBtn={ <ButtonStepNext enabled={ enabledButtonStepNextOne } /> }
         backBtn={ <ButtonStepPrevious /> }
         submitBtn={ <ButtonStepSave /> }
         allowClickControl={ false }
+        onSubmit={ () => {
+          console.log('creando creativo...');
+          console.log({ creative });
+          console.log({ clicks });
+          console.log({ interactions });
+        }}
       >
         <div>
-          <StepOne />
+          <StepOne creative={ creative } handleInputSelectChange={ handleInputSelectChange } />
         </div>
         <div>
-          <StepTwo />
+          <StepTwo creative={ creative } handleInputChange={ handleInputChange } />
         </div>
         <div>
-          <StepThree />
+          <StepThree creative={ creative } handleClicksChange={ handleClicksChange } handleInteractionsChange={ handleInteractionsChange } />
         </div>
       </Stepper>
     </div>
   );
 }
 
-function StepOne() {
+interface StepOneProps {
+  handleInputSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
+  creative: Creative
+}
+function StepOne({ handleInputSelectChange, creative }: StepOneProps) {
   return (
     <form action="#" className="flex flex-col gap-8 py-8">
 
       <div>
-        <label htmlFor="client" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Cliente</label>
+        <label htmlFor="creativeClientName" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Cliente</label>
         <div className="mt-2">
           <select
-            id="client"
+            id="creativeClientName"
+            name="creativeClientName"
             required
+            value={ creative.creativeClientName ?? '' }
+            onChange={ (e) => handleInputSelectChange(e) }
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 capitalize placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
           >
             <option value="">Seleccionar</option>
@@ -53,11 +110,14 @@ function StepOne() {
       </div>
 
       <div>
-        <label htmlFor="format" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Formato ITT</label>
+        <label htmlFor="creativeFormatName" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Formato ITT</label>
         <div className="mt-2">
           <select
-            id="format"
+            id="creativeFormatName"
+            name="creativeFormatName"
             required
+            value={ creative.creativeFormatName ?? '' }
+            onChange={ (e) => handleInputSelectChange(e) }
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 capitalize placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
           >
             <option value="">Seleccionar</option>
@@ -71,11 +131,14 @@ function StepOne() {
       </div>
 
       <div>
-        <label htmlFor="business-model" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Business Model</label>
+        <label htmlFor="creativeBusinessModel" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Business Model</label>
         <div className="mt-2">
           <select
-            id="business-model"
+            id="creativeBusinessModel"
             required
+            value={ creative.creativeBusinessModel ?? '' }
+            name="creativeBusinessModel"
+            onChange={ (e) => handleInputSelectChange(e) }
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 capitalize placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
           >
             <option value="">Seleccionar</option>
@@ -87,11 +150,14 @@ function StepOne() {
       </div>
 
       <div>
-        <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">País</label>
+        <label htmlFor="creativeCountry" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">País</label>
         <div className="mt-2">
           <select
-            id="country"
+            id="creativeCountry"
             required
+            value={ creative.creativeCountry ?? '' }
+            name="creativeCountry"
+            onChange={ (e) => handleInputSelectChange(e) }
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 capitalize placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
           >
             <option value="">Seleccionar</option>
@@ -108,16 +174,23 @@ function StepOne() {
   )
 }
 
-function StepTwo() {
+interface StepTwoProps {
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  creative: Creative
+}
+function StepTwo({ handleInputChange, creative }: StepTwoProps) {
   return (
     <form action="#" className="flex flex-col gap-8 py-8">
 
       <div>
-        <label htmlFor="clicks" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Clicks</label>
+        <label htmlFor="creativeClicksCant" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Clicks</label>
         <div className="mt-2">
           <input
             type="number"
-            id="clicks"
+            id="creativeClicksCant"
+            name="creativeClicksCant"
+            value={ creative.creativeClicksCant ?? 0 }
+            onChange={ (e) => handleInputChange(e) }
             placeholder="Cantidad de clicks"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
             required
@@ -126,11 +199,14 @@ function StepTwo() {
       </div>
 
       <div>
-        <label htmlFor="interactions" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Interactions</label>
+        <label htmlFor="creativeInteractionsCant" className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Interactions</label>
         <div className="mt-2">
           <input
             type="number"
-            id="interactions"
+            id="creativeInteractionsCant"
+            name="creativeInteractionsCant"
+            value={ creative.creativeInteractionsCant ?? 0 }
+            onChange={ (e) => handleInputChange(e) }
             placeholder="Cantidad de interactiones"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
             required
@@ -142,60 +218,79 @@ function StepTwo() {
   )
 }
 
-function StepThree() {
-  const cant = 4;
+interface StepThreeProps {
+  creative: Creative,
+  handleInteractionsChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleClicksChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+}
+function StepThree({ creative, handleClicksChange, handleInteractionsChange }: StepThreeProps) {
   const [ clicksCant, setClicksCant ] = useState<number[]>([]);
   const [ interactionsCant, setInteractionsCant ] = useState<number[]>([]);
 
   useEffect(() => {
-    for (let i = 0; i < cant; i++) {
+    if (!creative.creativeClicksCant) return;
+
+    for (let i = 0; i < creative.creativeClicksCant; i++) {
       setClicksCant(oldValue => [ ...oldValue, i ]);
     }
   }, []);
 
   useEffect(() => {
-    for (let i = 0; i < cant; i++) {
+    if (!creative.creativeInteractionsCant) return;
+
+    for (let i = 0; i < creative.creativeInteractionsCant; i++) {
       setInteractionsCant(oldValue => [ ...oldValue, i ]);
     }
   }, []);
-
 
   return (
     <form action="#" className="flex flex-col gap-8 py-8">
       <h2 className="block text-lg font-inter font-medium leading-6 text-gray-900 dark:text-gray-300">Clicks</h2>
 
       {
-        clicksCant.map((value, index) => (
-          <div key={ value }>
-            <div className="mt-2">
-              <input
-                type="text"
-                id="clicks"
-                placeholder={ `Nombre click ${ index +  1 }` }
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
-                required
-              />
-            </div>
-          </div>
-        ))
+        clicksCant.length
+          ? (
+              clicksCant.map((value, index) => (
+                <div key={ value }>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name={ `click-${ index +  1 }` }
+                      id="clicks"
+                      placeholder={ `Nombre click ${ index +  1 }` }
+                      onChange={ (e) => handleClicksChange(e) }
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                      required
+                    />
+                  </div>
+                </div>
+              ))
+            )
+          : <AlertWarning text="No hay clicks." />
       }
 
 
       <h2 className="block text-lg font-inter font-medium leading-6 text-gray-900 dark:text-gray-300">Interacciones</h2>
       {
-        interactionsCant.map((value, index) => (
-          <div key={ value }>
-            <div className="mt-2">
-              <input
-                type="text"
-                id="clicks"
-                placeholder={ `Nombre Interacción ${ index +  1 }` }
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
-                required
-              />
-            </div>
-          </div>
-        ))
+        interactionsCant.length
+          ? (
+            interactionsCant.map((value, index) => (
+              <div key={ value }>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    name={ `interaction-${ index +  1 }` }
+                    id="clicks"
+                    placeholder={ `Nombre Interacción ${ index +  1 }` }
+                    onChange={ (e) => handleInteractionsChange(e) }
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                    required
+                  />
+                </div>
+              </div>
+            ))
+          )
+          : <AlertWarning text="No hay interacciones." />
       }
 
     </form>
@@ -203,10 +298,17 @@ function StepThree() {
 }
 
 
-function ButtonStepNext() {
+
+
+
+//   :::::: Custom Buttons
+interface ButtonStepNext {
+  enabled: boolean
+}
+function ButtonStepNext({ enabled = true }: ButtonStepNext) {
   return (
     <div>
-      <button className="flex w-full justify-center rounded-md bg-kickads px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kickads dark:bg-kickads">Siguiente</button>
+      <button disabled={ enabled } className={ `flex w-full justify-center rounded-md bg-kickads px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm ${ enabled && 'cursor-not-allowed opacity-80'} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kickads dark:bg-kickads` }>Siguiente</button>
     </div>
   )
 }
@@ -225,4 +327,24 @@ function ButtonStepSave() {
       <button className="flex w-full justify-center rounded-md bg-kickads px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kickads dark:bg-kickads">Guardar</button>
     </div>
   )
+}
+
+interface AlertWarning {
+  text: string
+}
+function AlertWarning({ text }:  AlertWarning) {
+  return (
+    <div className="w-full">
+      <div className="mx-auto max-w-[448px] w-full rounded-md bg-yellow-50 p-4">
+        <div className="flex">
+          <div className="flex-shrink-0">
+            <ExclamationCircleIcon className="h-5 w-5 text-yellow-400"/>
+          </div>
+          <div className="ml-3 flex-1 md:flex md:justify-between">
+            <p className="text-sm text-yellow-700">{ text }</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
