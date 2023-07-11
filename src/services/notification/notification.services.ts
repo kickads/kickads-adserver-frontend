@@ -9,7 +9,7 @@ export function successNotification(message: string) {
 }
 
 export function errorNotification(message: string) {
-  toast.success(`${ message }`, {
+  toast.error(`${ message }`, {
     className: 'bg-white font-inter dark:bg-slate-800 dark:text-slate-300'
   });
 }

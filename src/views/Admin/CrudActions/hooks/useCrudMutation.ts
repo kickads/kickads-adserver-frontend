@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../../../providers/ReactQueryProvider.tsx';
 import { useStore } from '../../../../state/store/store.tsx';
-import { successNotification } from '../../../../services/notification/notification.services.ts';
+import { errorNotification, successNotification } from '../../../../services/notification/notification.services.ts';
 import { createItem, deleteItem, updateItem } from '../services/crudActions.services.ts';
 
 interface ItemModel {
@@ -14,6 +14,21 @@ interface UseCrudMutationModel {
   crudPath: string,
   crudQueryKey: string
 }
+
+export interface ErrorResponse {
+  response: ErrorData;
+}
+
+export interface ErrorData {
+  status: string;
+  data: ErrorModel;
+}
+
+export interface ErrorModel {
+  message: string;
+}
+
+// error.response.data.message
 
 export function useCrudMutation({ crudPath, crudQueryKey }: UseCrudMutationModel) {
   const userToken = useStore(state => state.userToken);
@@ -42,6 +57,9 @@ export function useCrudMutation({ crudPath, crudQueryKey }: UseCrudMutationModel
       });
 
       successNotification('Actualizado');
+    },
+    onError: (error: ErrorResponse) => {
+      errorNotification(error.response.data.message)
     }
   });
 
@@ -53,6 +71,9 @@ export function useCrudMutation({ crudPath, crudQueryKey }: UseCrudMutationModel
       });
 
       successNotification('Creado');
+    },
+    onError: (error: ErrorResponse) => {
+      errorNotification(error.response.data.message)
     }
   });
 
