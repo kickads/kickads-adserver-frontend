@@ -28,6 +28,8 @@ import {
 } from '../views/Admin/CrudActions/Currencies/views/CreateCurrency.tsx';
 import { EditCurrency } from '../views/Admin/CrudActions/Currencies/views/EditCurrency.tsx';
 import { Creatives } from '../views/Creatives/Creatives.tsx';
+import { CreativesCreate } from '../views/Creatives/views/CreativesCreate.tsx';
+import { CreativesHome, getAllClientsLoader } from '../views/Creatives/views/CreativesHome.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,7 +49,13 @@ const router = createBrowserRouter(
 
           <Route element={ <LayoutAdmin /> }>
             <Route index element={ <Home /> } />
-            <Route path="creatives" element={ <Creatives /> } />
+            <Route path="creatives-create" element={ <CreativesCreate /> } />
+
+            <Route path="creatives" element={ <Creatives /> } >
+              <Route index element={ <CreativesHome /> } loader={ getAllClientsLoader } />
+              <Route path="create" element={ <CreativesCreate /> } />
+            </Route>
+
             <Route path="users" element={ <AdminUsers /> } loader={ getAllUsersLoader } />
           </Route>
 
