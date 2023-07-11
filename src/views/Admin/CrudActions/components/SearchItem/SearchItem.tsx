@@ -34,6 +34,7 @@ export function SearchItem({ item }: SearchItemProps) {
               <input
                 type="text"
                 placeholder={ item.name }
+                defaultValue={ item.name }
                 className="block p-1 px-2 w-full sm:leading-6 rounded-md text-gray-900 bg-gray-50 border placeholder:text-gray-400 sm:text-sm dark:border-slate-700 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300"
                 onChange={ handleCrudFieldOnChange }
                 required
