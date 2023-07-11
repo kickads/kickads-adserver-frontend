@@ -4,8 +4,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ArrowLeftOnRectangleIcon,
   Bars3Icon,
-  Cog6ToothIcon, SquaresPlusIcon,
-  UserIcon,
+  // Cog6ToothIcon,
+  // UserIcon,
+  SquaresPlusIcon,
   UsersIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -17,11 +18,11 @@ import getImagePath from '../../helpers/GetImagePath/getImagePath.ts';
 import { AvatarFallback } from '../AvatarFallback/AvatarFallback.tsx';
 
 const userMenu = [
-  {
-    name: 'Profile',
-    path: 'profile',
-    Icon: <UserIcon className="w-5" />
-  },
+  // {
+  //   name: 'Profile',
+  //   path: 'profile',
+  //   Icon: <UserIcon className="w-5" />
+  // },
   {
     name: 'Users',
     path: 'users',
@@ -32,11 +33,11 @@ const userMenu = [
     path: 'crud-actions',
     Icon: <SquaresPlusIcon className="w-5" />
   },
-  {
-    name: 'Settings',
-    path: 'settings',
-    Icon: <Cog6ToothIcon className="w-5" />
-  },
+  // {
+  //   name: 'Settings',
+  //   path: 'settings',
+  //   Icon: <Cog6ToothIcon className="w-5" />
+  // },
 ];
 
 export function Navbar() {
