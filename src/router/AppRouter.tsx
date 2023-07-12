@@ -27,9 +27,10 @@ import {
   getAllCountriesAndAcronymsLoader
 } from '../views/Admin/CrudActions/Currencies/views/CreateCurrency.tsx';
 import { EditCurrency } from '../views/Admin/CrudActions/Currencies/views/EditCurrency.tsx';
-import { Creatives } from '../views/Creatives/Creatives.tsx';
-import { CreativesCreate } from '../views/Creatives/views/CreativesCreate.tsx';
-import { CreativesHome, getAllClientsLoader } from '../views/Creatives/views/CreativesHome.tsx';
+import { IntersticialCreate } from '../views/Intersticials/views/IntersticialCreate.tsx';
+import { IntersticialHome } from '../views/Intersticials/views/IntersticialHome.tsx';
+import { creativesCreateLoader } from '../views/Intersticials/components/steps/StepOne.tsx';
+import { Intersticials } from '../views/Intersticials/Intersticials.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,11 +50,11 @@ const router = createBrowserRouter(
 
           <Route element={ <LayoutAdmin /> }>
             <Route index element={ <Home /> } />
-            <Route path="creatives-create" element={ <CreativesCreate /> } />
+            <Route path="creatives-create" element={ <IntersticialCreate /> } />
 
-            <Route path="creatives" element={ <Creatives /> } >
-              <Route index element={ <CreativesHome /> } loader={ getAllClientsLoader } />
-              <Route path="create" element={ <CreativesCreate /> } />
+            <Route path="creatives" element={ <Intersticials /> } >
+              <Route index element={ <IntersticialHome /> } />
+              <Route path="create" element={ <IntersticialCreate /> } loader={ creativesCreateLoader } />
             </Route>
 
             <Route path="users" element={ <AdminUsers /> } loader={ getAllUsersLoader } />
