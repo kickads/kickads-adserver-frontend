@@ -7,6 +7,7 @@ import {
   // Cog6ToothIcon,
   // UserIcon,
   SquaresPlusIcon,
+  UserIcon,
   UsersIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -18,11 +19,11 @@ import getImagePath from '../../helpers/GetImagePath/getImagePath.ts';
 import { AvatarFallback } from '../AvatarFallback/AvatarFallback.tsx';
 
 const userMenu = [
-  // {
-  //   name: 'Profile',
-  //   path: 'profile',
-  //   Icon: <UserIcon className="w-5" />
-  // },
+  {
+    name: 'Profile',
+    path: 'profile',
+    Icon: <UserIcon className="w-5" />
+  },
   {
     name: 'Users',
     path: 'users',

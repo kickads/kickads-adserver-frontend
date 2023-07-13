@@ -31,6 +31,7 @@ import { IntersticialCreate } from '../views/Intersticials/views/IntersticialCre
 import { IntersticialHome } from '../views/Intersticials/views/IntersticialHome.tsx';
 import { creativesCreateLoader } from '../views/Intersticials/components/steps/StepOne.tsx';
 import { Intersticials } from '../views/Intersticials/Intersticials.tsx';
+import { Profile } from '../views/Profile/Profile.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,7 +51,7 @@ const router = createBrowserRouter(
 
           <Route element={ <LayoutAdmin /> }>
             <Route index element={ <Home /> } />
-            <Route path="creatives-create" element={ <IntersticialCreate /> } />
+            <Route path="profile" element={ <Profile /> } />
 
             <Route path="creatives" element={ <Intersticials /> } >
               <Route index element={ <IntersticialHome /> } />
