@@ -35,7 +35,7 @@ export function SearchItem({ item }: SearchItemProps) {
                 type="text"
                 placeholder={ item.name }
                 defaultValue={ item.name }
-                className="block p-1 px-2 w-full sm:leading-6 rounded-md text-gray-900 bg-gray-50 border placeholder:text-gray-400 sm:text-sm dark:border-slate-700 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-300"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm focus:ring-kickads ring-1 ring-inset ring-gray-300 capitalize placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white dark:focus:ring-kickads"
                 onChange={ handleCrudFieldOnChange }
                 required
                 pattern="[a-zA-Z ]{2,50}"

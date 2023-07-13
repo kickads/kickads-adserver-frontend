@@ -77,7 +77,7 @@ export function CreateCompany() {
                 type="text"
                 id="name"
                 placeholder="Escribe un nombre"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm focus:ring-kickads ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white dark:focus:ring-kickads"
                 required
                 { ...register('name') }
               />
@@ -89,7 +89,7 @@ export function CreateCompany() {
               <select
                 id="entity_id"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm focus:ring-kickads ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white dark:focus:ring-kickads"
                 { ...register('entity_id') }
               >
                 <option value="">Seleccionar</option>
@@ -106,7 +106,7 @@ export function CreateCompany() {
                 id="country_id"
                 required
                 { ...register('country_id') }
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm focus:ring-kickads ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focoutline-kickads sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white dark:focus:ring-kickads"
               >
                 <option value="">Seleccionar</option>
                 {
