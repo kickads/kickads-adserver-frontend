@@ -10,7 +10,7 @@ export function AdminCrudActions() {
           <div className="w-2/12 pr-2 border-r dark:border-gray-700">
             <SideBar />
           </div>
-          <div className="px-2 w-10/12 h-[calc(100vh-48px)]">
+          <div className="px-2 w-10/12 h-[calc(100vh-48px)] overflow-hidden">
             <Outlet />
           </div>
         </section>

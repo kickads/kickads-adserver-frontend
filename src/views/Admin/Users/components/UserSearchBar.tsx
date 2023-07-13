@@ -9,7 +9,6 @@ interface Props {
 
 export function UserSearchBar({ setUsersFiltered, users }: Props) {
 
-  console.log(users);
   const handleUserOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsersFiltered(users.filter(user => user.name.toLowerCase().includes(e.target.value)) ?? []);
   };

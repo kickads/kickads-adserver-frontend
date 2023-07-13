@@ -53,7 +53,7 @@ export function IntersticialCreate() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] py-6 lg:min-h-[calc(100vh-56px)] max-w-lg mx-auto">
+    <div className="py-6 max-w-lg mx-auto">
       <Stepper
         activeColor="#14a8a4"
         fillStroke="#14a8a4"
